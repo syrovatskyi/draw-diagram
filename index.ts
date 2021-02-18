@@ -794,10 +794,10 @@ const data5: Component = {
 };
 
 const container = document.querySelector('.container');
-const container2 = document.querySelector('.container2');
-const container3 = document.querySelector('.container3');
-const container4 = document.querySelector('.container4');
-const container5 = document.querySelector('.container5');
+// const container2 = document.querySelector('.container2');
+// const container3 = document.querySelector('.container3');
+// const container4 = document.querySelector('.container4');
+// const container5 = document.querySelector('.container5');
 
 // drawDiagram(container, data.entities, data.diagram.relationsOnDiagram, data.diagram);
 // drawDiagram(container2, data2.entities, data2.diagram.relationsOnDiagram, data2.diagram);
