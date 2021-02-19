@@ -52,14 +52,17 @@ const data = {
                 }]
         }],
     relations: [{
+            name: 'UserToCountry',
             type: RelationTypeEnum.OneToMany,
             from: "user",
             to: "country"
         }, {
+            name: 'CountryToCapital',
             type: RelationTypeEnum.OneToOne,
             from: "country",
             to: "capital"
         }, {
+            name: 'CountryToCities',
             type: RelationTypeEnum.OneToMany,
             from: "country",
             to: "cities"
@@ -188,18 +191,22 @@ const data2 = {
                 }]
         }],
     relations: [{
+            name: 'StudentToCourse',
             type: RelationTypeEnum.OneToMany,
             from: "student",
             to: "course"
         }, {
+            name: 'ProfessorToCourse',
             type: RelationTypeEnum.OneToMany,
             from: "professor",
             to: "course"
         }, {
+            name: 'CourseToGroup',
             type: RelationTypeEnum.OneToMany,
             from: "course",
             to: "group"
         }, {
+            name: 'GroupToStudent',
             type: RelationTypeEnum.OneToMany,
             from: "group",
             to: "student"
@@ -352,18 +359,22 @@ const data3 = {
                 }]
         }],
     relations: [{
+            name: "EmployerToEmployee",
             type: RelationTypeEnum.OneToMany,
             from: "employer",
             to: "employee"
         }, {
+            name: "PositionToEmployee",
             type: RelationTypeEnum.OneToMany,
             from: "position",
             to: "employee"
         }, {
+            name: "OfficeToEmployee",
             type: RelationTypeEnum.OneToMany,
             from: "office",
             to: "employee"
         }, {
+            name: "EmployerToCustomer",
             type: RelationTypeEnum.OneToMany,
             from: "employer",
             to: "customer"
@@ -521,22 +532,27 @@ const data4 = {
                 }]
         }],
     relations: [{
+            name: "StudentToProgress",
             type: RelationTypeEnum.OneToMany,
             from: "student",
             to: "progress"
         }, {
+            name: "SubjectToProgress",
             type: RelationTypeEnum.OneToMany,
             from: "subject",
             to: "progress"
         }, {
+            name: "FacultyToStudent",
             type: RelationTypeEnum.OneToMany,
             from: "faculty",
             to: "student"
         }, {
+            name: "FacultyToSpeciality",
             type: RelationTypeEnum.OneToMany,
             from: "faculty",
             to: "speciality"
         }, {
+            name: "SpecialityToStudent",
             type: RelationTypeEnum.OneToMany,
             from: "speciality",
             to: "student"
@@ -694,14 +710,17 @@ const data5 = {
                 }]
         }],
     relations: [{
+            name: "CustomerToOrder",
             type: RelationTypeEnum.OneToMany,
             from: "customer",
             to: "order"
         }, {
+            name: "CourierToOrder",
             type: RelationTypeEnum.OneToOne,
             from: "courier",
             to: "order"
         }, {
+            name: "OrderToProduct",
             type: RelationTypeEnum.OneToMany,
             from: "order",
             to: "product"
@@ -784,7 +803,7 @@ const arrData = [
 ];
 arrData.forEach(data => {
     const container = createDiagramContainer();
-    drawDiagram(container, data.entities, data.diagram.relationsOnDiagram, data.diagram);
+    drawDiagram(container, data.entities, data.diagram.relationsOnDiagram, data.diagram, data.relations);
 });
 function createDiagramContainer() {
     const container = document.createElement('div');
@@ -792,13 +811,10 @@ function createDiagramContainer() {
     document.getElementsByTagName('body')[0].appendChild(container);
     return container;
 }
-function drawDiagram(container, entities, relations, diagram) {
-    d3.select(container).append('svg');
-    createOne2OneStart(container);
-    createOne2OneEnd(container);
-    createOne2ManyEnd(container);
+function drawDiagram(container, entities, relationOnDiagram, diagram, relations) {
+    drawSvg(container);
     entities.forEach(e => drawEntity(e, container, diagram));
-    relations.forEach(r => drawRelation(r, container, diagram));
+    relationOnDiagram.forEach(r => drawRelation(r, container, diagram, getRelationType(relations, r.name)));
 }
 function getEntityRect(diagram, name) {
     const e = diagram.entitiesOnDiagram.find(item => item.name === name);
@@ -821,16 +837,30 @@ function drawEntity(entity, container, diagram) {
         column.append('td').attr('class', 'column-field').text(columns[i].field);
     }
 }
-function drawRelation(relation, container, diagram) {
+function drawSvg(container) {
+    d3.select(container).append('svg');
+    createOne2OneStart(container);
+    createOne2OneEnd(container);
+    createOne2ManyEnd(container);
+}
+function getRelationType(relations, name) {
+    const relationType = relations.find(item => item.name === name);
+    return relationType === null ? null : relationType.type;
+}
+function drawRelation(relationOnDiagram, container, diagram, relationType) {
     const svg = d3.select(container).select('svg');
-    const startRect = getEntityRect(diagram, relation.startPosition.name);
-    const endRect = getEntityRect(diagram, relation.endPosition.name);
-    const startPoint = calcRelationPoint(relation.startPosition, startRect);
-    const endPoint = calcRelationPoint(relation.endPosition, endRect);
-    svg.append('path')
-        .attr("d", `M ${startPoint.x},${startPoint.y} L ${endPoint.x},${endPoint.y}`)
-        .attr("marker-start", "url(#o2oStart)")
-        .attr("marker-end", "url(#o2mEnd");
+    const startRect = getEntityRect(diagram, relationOnDiagram.startPosition.name);
+    const endRect = getEntityRect(diagram, relationOnDiagram.endPosition.name);
+    const startPoint = calcRelationPoint(relationOnDiagram.startPosition, startRect);
+    const endPoint = calcRelationPoint(relationOnDiagram.endPosition, endRect);
+    const path = svg.append('path')
+        .attr("d", `M ${startPoint.x},${startPoint.y} L ${endPoint.x},${endPoint.y}`);
+    if (relationType === RelationTypeEnum.OneToMany) {
+        path.attr("marker-start", "url(#o2oStart)").attr("marker-end", "url(#o2mEnd");
+    }
+    else {
+        path.attr("marker-start", "url(#o2oStart)").attr("marker-end", "url(#o2oEnd");
+    }
 }
 function calcRelationPoint(position, rect) {
     const { side, shiftInPercent } = position;

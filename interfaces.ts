@@ -21,6 +21,7 @@ export interface IEntity {
 }
 
 export interface IRelation {
+  name: string
   type: RelationTypeEnum;
   from: string;
   to: string;
