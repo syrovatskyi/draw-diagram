@@ -4,12 +4,12 @@ import {
   IEntity,
   IPoint,
   IRect,
+  IRelation,
   IRelationOnDiagram,
   IRelationPosition,
   RelationTypeEnum,
   SideEnum
 } from "./interfaces.js";
-
 // @ts-ignore
 import * as d3 from 'https://unpkg.com/d3?module';
 
@@ -65,14 +65,17 @@ const data: Component = {
     }]
   } ],
   relations: [ {
+    name: 'UserToCountry',
     type: RelationTypeEnum.OneToMany,
     from: "user",
     to: "country"
   }, {
+    name: 'CountryToCapital',
     type: RelationTypeEnum.OneToOne,
     from: "country",
     to: "capital"
   }, {
+    name: 'CountryToCities',
     type: RelationTypeEnum.OneToMany,
     from: "country",
     to: "cities"
@@ -201,18 +204,22 @@ const data2: Component = {
     }]
   } ],
   relations: [ {
+    name: 'StudentToCourse',
     type: RelationTypeEnum.OneToMany,
     from: "student",
     to: "course"
   }, {
+    name: 'ProfessorToCourse',
     type: RelationTypeEnum.OneToMany,
     from: "professor",
     to: "course"
   }, {
+    name: 'CourseToGroup',
     type: RelationTypeEnum.OneToMany,
     from: "course",
     to: "group"
   }, {
+    name: 'GroupToStudent',
     type: RelationTypeEnum.OneToMany,
     from: "group",
     to: "student"
@@ -365,18 +372,22 @@ const data3: Component = {
     }]
   } ],
   relations: [ {
+    name: "EmployerToEmployee",
     type: RelationTypeEnum.OneToMany,
     from: "employer",
     to: "employee"
   }, {
+    name: "PositionToEmployee",
     type: RelationTypeEnum.OneToMany,
     from: "position",
     to: "employee"
   }, {
+    name: "OfficeToEmployee",
     type: RelationTypeEnum.OneToMany,
     from: "office",
     to: "employee"
   }, {
+    name: "EmployerToCustomer",
     type: RelationTypeEnum.OneToMany,
     from: "employer",
     to: "customer"
@@ -534,22 +545,27 @@ const data4: Component = {
     }]
   } ],
   relations: [ {
+    name: "StudentToProgress",
     type: RelationTypeEnum.OneToMany,
     from: "student",
     to: "progress"
   }, {
+    name: "SubjectToProgress",
     type: RelationTypeEnum.OneToMany,
     from: "subject",
     to: "progress"
   }, {
+    name: "FacultyToStudent",
     type: RelationTypeEnum.OneToMany,
     from: "faculty",
     to: "student"
   }, {
+    name: "FacultyToSpeciality",
     type: RelationTypeEnum.OneToMany,
     from: "faculty",
     to: "speciality"
   }, {
+    name: "SpecialityToStudent",
     type: RelationTypeEnum.OneToMany,
     from: "speciality",
     to: "student"
@@ -707,14 +723,17 @@ const data5: Component = {
     }]
   } ],
   relations: [ {
+    name: "CustomerToOrder",
     type: RelationTypeEnum.OneToMany,
     from: "customer",
     to: "order"
   }, {
+    name: "CourierToOrder",
     type: RelationTypeEnum.OneToOne,
     from: "courier",
     to: "order"
   }, {
+    name: "OrderToProduct",
     type: RelationTypeEnum.OneToMany,
     from: "order",
     to: "product"
@@ -799,7 +818,7 @@ const arrData = [
 
 arrData.forEach(data => {
   const container = createDiagramContainer();
-  drawDiagram(container, data.entities, data.diagram.relationsOnDiagram, data.diagram);
+  drawDiagram(container, data.entities, data.diagram.relationsOnDiagram, data.diagram, data.relations);
 });
 
 function createDiagramContainer(): Element {
@@ -809,13 +828,10 @@ function createDiagramContainer(): Element {
   return container;
 }
 
-function drawDiagram(container: Element, entities: IEntity[], relations: IRelationOnDiagram[], diagram: IDiagram): void {
-  d3.select(container).append('svg');
-  createOne2OneStart(container);
-  createOne2OneEnd(container);
-  createOne2ManyEnd(container);
+function drawDiagram(container: Element, entities: IEntity[], relationOnDiagram: IRelationOnDiagram[], diagram: IDiagram, relations: IRelation[]): void {
+  drawSvg(container);
   entities.forEach(e => drawEntity(e, container, diagram));
-  relations.forEach(r => drawRelation( r, container, diagram ));
+  relationOnDiagram.forEach(r => drawRelation( r, container, diagram, getRelationType(relations, r.name) ));
 }
 
 function getEntityRect(diagram: IDiagram, name: string): IRect {
@@ -841,18 +857,37 @@ function drawEntity(entity: IEntity, container: Element, diagram: IDiagram ): vo
   }
 }
 
+function drawSvg(container: Element): void {
+  d3.select(container).append('svg');
+  createOne2OneStart(container);
+  createOne2OneEnd(container);
+  createOne2ManyEnd(container);
+}
 
+function getRelationType(relations: IRelation[], name: string): RelationTypeEnum {
+  const relationType = relations.find(item => item.name === name);
+  return relationType === null ? null : relationType.type
+}
 
-function drawRelation(relation: IRelationOnDiagram, container: Element, diagram: IDiagram): void {
+function drawRelation(relationOnDiagram: IRelationOnDiagram, container: Element, diagram: IDiagram, relationType: RelationTypeEnum): void {
   const svg = d3.select(container).select('svg');
-  const startRect = getEntityRect(diagram, relation.startPosition.name);
-  const endRect = getEntityRect(diagram, relation.endPosition.name);
-  const startPoint = calcRelationPoint(relation.startPosition, startRect);
-  const endPoint = calcRelationPoint(relation.endPosition, endRect);
-  svg.append('path')
-    .attr("d", `M ${startPoint.x},${startPoint.y} L ${endPoint.x},${endPoint.y}`)
-    .attr("marker-start", "url(#o2oStart)")
-    .attr("marker-end", "url(#o2mEnd");
+  const startRect = getEntityRect(diagram, relationOnDiagram.startPosition.name);
+  const endRect = getEntityRect(diagram, relationOnDiagram.endPosition.name);
+  const startPoint = calcRelationPoint(relationOnDiagram.startPosition, startRect);
+  const endPoint = calcRelationPoint(relationOnDiagram.endPosition, endRect);
+  const path = svg.append('path')
+    .attr("d", `M ${startPoint.x},${startPoint.y} L ${endPoint.x},${endPoint.y}`);
+
+  switch (relationType) {
+    case RelationTypeEnum.OneToMany:
+      path.attr("marker-start", "url(#o2oStart)").attr("marker-end", "url(#o2mEnd");
+      break;
+    case RelationTypeEnum.OneToOne:
+      path.attr("marker-start", "url(#o2oStart)").attr("marker-end", "url(#o2oEnd");
+      break;
+  }
+
+
 }
 
 function calcRelationPoint(position: IRelationPosition, rect: IRect): IPoint {
@@ -883,7 +918,7 @@ function calcRelationPoint(position: IRelationPosition, rect: IRect): IPoint {
 }
 
 
-function createOne2OneStart(container): void {
+function createOne2OneStart(container: Element): void {
   const marker = d3.select(container).select('svg').append('marker')
     .attr('id', 'o2oStart')
     .attr('refX', 0)
@@ -897,7 +932,7 @@ function createOne2OneStart(container): void {
     .attr("x2", 10)
     .attr("y2", 10);
 }
-function createOne2OneEnd(container): void {
+function createOne2OneEnd(container: Element): void {
   const marker = d3.select(container).select('svg').append('marker')
     .attr('id', 'o2oEnd')
     .attr('refX', 16)
@@ -911,7 +946,7 @@ function createOne2OneEnd(container): void {
     .attr("x2", 5)
     .attr("y2", 10);
 }
-function createOne2ManyEnd(container): void {
+function createOne2ManyEnd(container: Element): void {
   const marker = d3.select(container).select('svg').append('marker')
     .attr('id', 'o2mEnd')
     .attr('refX', 16)
