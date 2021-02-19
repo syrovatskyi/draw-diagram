@@ -797,14 +797,23 @@ const arrData = [
   data, data2, data3, data4, data5
 ];
 
-arrData.forEach((data, index) => {
-  const container = document.createElement('div');
-  container.setAttribute('class', `diagram-container`);
-  document.getElementsByTagName('body')[0].appendChild(container);
+arrData.forEach(data => {
+  const container = createDiagramContainer();
   drawDiagram(container, data.entities, data.diagram.relationsOnDiagram, data.diagram);
 });
 
+function createDiagramContainer(): Element {
+  const container = document.createElement('div');
+  container.setAttribute('class', `diagram-container`);
+  document.getElementsByTagName('body')[0].appendChild(container);
+  return container;
+}
+
 function drawDiagram(container: Element, entities: IEntity[], relations: IRelationOnDiagram[], diagram: IDiagram): void {
+  d3.select(container).append('svg');
+  createOne2OneStart(container);
+  createOne2OneEnd(container);
+  createOne2ManyEnd(container);
   entities.forEach(e => drawEntity(e, container, diagram));
   relations.forEach(r => drawRelation( r, container, diagram ));
 }
@@ -835,10 +844,7 @@ function drawEntity(entity: IEntity, container: Element, diagram: IDiagram ): vo
 
 
 function drawRelation(relation: IRelationOnDiagram, container: Element, diagram: IDiagram): void {
-  const svg = d3.select(container).append('svg');
-  createOne2OneStart();
-  createOne2OneEnd();
-  createOne2ManyEnd();
+  const svg = d3.select(container).select('svg');
   const startRect = getEntityRect(diagram, relation.startPosition.name);
   const endRect = getEntityRect(diagram, relation.endPosition.name);
   const startPoint = calcRelationPoint(relation.startPosition, startRect);
@@ -877,70 +883,61 @@ function calcRelationPoint(position: IRelationPosition, rect: IRect): IPoint {
 }
 
 
-function createOne2OneStart(): void {
-  const marker = d3.select('svg').append('marker')
+function createOne2OneStart(container): void {
+  const marker = d3.select(container).select('svg').append('marker')
     .attr('id', 'o2oStart')
     .attr('refX', 0)
     .attr('refY', 5)
     .attr('markerWidth', 20)
     .attr('markerHeight', 20)
     .attr('orient', 'auto');
-
   marker.append('line')
     .attr("x1", 10)
     .attr("y1", 0)
     .attr("x2", 10)
     .attr("y2", 10);
 }
-
-function createOne2OneEnd(): void {
-  const marker = d3.select('svg').append('marker')
+function createOne2OneEnd(container): void {
+  const marker = d3.select(container).select('svg').append('marker')
     .attr('id', 'o2oEnd')
     .attr('refX', 16)
     .attr('refY', 5)
     .attr('markerWidth', 20)
     .attr('markerHeight', 20)
     .attr('orient', 'auto');
-
   marker.append('line')
     .attr("x1", 5)
     .attr("y1", 0)
     .attr("x2", 5)
     .attr("y2", 10);
 }
-
-function createOne2ManyEnd(): void {
-  const marker = d3.select('svg').append('marker')
+function createOne2ManyEnd(container): void {
+  const marker = d3.select(container).select('svg').append('marker')
     .attr('id', 'o2mEnd')
     .attr('refX', 16)
     .attr('refY', 5)
     .attr('markerWidth', 20)
     .attr('markerHeight', 20)
     .attr('orient', 'auto');
-
   marker.append('line')
     .attr("x1", 8)
     .attr("y1", 0)
     .attr("x2", 8)
     .attr("y2", 10);
-
   marker.append('line')
     .attr("x1", 16)
     .attr("y1", 0)
     .attr("x2", 8)
     .attr("y2", 5);
-
   marker.append('line')
     .attr("x1", 8)
     .attr("y1", 5)
     .attr("x2", 16)
     .attr("y2", 10);
-
   marker.append('line')
     .attr("x1", 8)
     .attr("y1", 5)
     .attr("x2", 16)
     .attr("y2", 5);
-
 }
 
