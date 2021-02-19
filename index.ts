@@ -793,17 +793,17 @@ const data5: Component = {
   }
 };
 
-const container = document.querySelector('.container');
-// const container2 = document.querySelector('.container2');
-// const container3 = document.querySelector('.container3');
-// const container4 = document.querySelector('.container4');
-// const container5 = document.querySelector('.container5');
+const arrData = [
+  data, data2, data3, data4, data5
+];
 
-// drawDiagram(container, data.entities, data.diagram.relationsOnDiagram, data.diagram);
-// drawDiagram(container2, data2.entities, data2.diagram.relationsOnDiagram, data2.diagram);
-// drawDiagram(container3, data3.entities, data3.diagram.relationsOnDiagram, data3.diagram);
-drawDiagram(container, data4.entities, data4.diagram.relationsOnDiagram, data4.diagram);
-// drawDiagram(container5, data5.entities, data5.diagram.relationsOnDiagram, data5.diagram);
+arrData.forEach((data, index) => {
+  const container = document.createElement('div');
+  container.setAttribute('class', `diagram-container`);
+  document.getElementsByTagName('body')[0].appendChild(container);
+  drawDiagram(container, data.entities, data.diagram.relationsOnDiagram, data.diagram);
+});
+
 function drawDiagram(container: Element, entities: IEntity[], relations: IRelationOnDiagram[], diagram: IDiagram): void {
   entities.forEach(e => drawEntity(e, container, diagram));
   relations.forEach(r => drawRelation( r, container, diagram ));
@@ -818,15 +818,14 @@ function drawEntity(entity: IEntity, container: Element, diagram: IDiagram ): vo
   const rect = getEntityRect(diagram, entity.name);
   const content = d3.select(container).append('div').attr('class', 'entity');
   content.style('top', rect.top + 'px')
-          .style('left', rect.left + 'px')
-          .style('width', rect.width + 'px')
-          .style('height', rect.height + 'px');
-
+    .style('left', rect.left + 'px')
+    .style('width', rect.width + 'px')
+    .style('height', rect.height + 'px');
   const table = content.append('table');
   const thead = table.append('caption');
   thead.text(entity.name);
   const columns = entity.columns;
-  for(let i = 0; i < columns.length; i++) {
+  for (let i = 0; i < columns.length; i++) {
     let column = table.append('tr');
     column.append('td').attr('class', 'column-id').text(columns[i].id);
     column.append('td').attr('class', 'column-field').text(columns[i].field);
@@ -834,8 +833,9 @@ function drawEntity(entity: IEntity, container: Element, diagram: IDiagram ): vo
 }
 
 
+
 function drawRelation(relation: IRelationOnDiagram, container: Element, diagram: IDiagram): void {
-  d3.select(container).append('svg');
+  const svg = d3.select(container).append('svg');
   createOne2OneStart();
   createOne2OneEnd();
   createOne2ManyEnd();
@@ -843,8 +843,8 @@ function drawRelation(relation: IRelationOnDiagram, container: Element, diagram:
   const endRect = getEntityRect(diagram, relation.endPosition.name);
   const startPoint = calcRelationPoint(relation.startPosition, startRect);
   const endPoint = calcRelationPoint(relation.endPosition, endRect);
-  d3.select('svg').append('path')
-    .attr("d",`M ${ startPoint.x},${startPoint.y} L ${endPoint.x},${endPoint.y}`)
+  svg.append('path')
+    .attr("d", `M ${startPoint.x},${startPoint.y} L ${endPoint.x},${endPoint.y}`)
     .attr("marker-start", "url(#o2oStart)")
     .attr("marker-end", "url(#o2mEnd");
 }

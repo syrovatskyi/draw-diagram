@@ -779,16 +779,15 @@ const data5 = {
             }]
     }
 };
-const container = document.querySelector('.container');
-// const container2 = document.querySelector('.container2');
-// const container3 = document.querySelector('.container3');
-// const container4 = document.querySelector('.container4');
-// const container5 = document.querySelector('.container5');
-// drawDiagram(container, data.entities, data.diagram.relationsOnDiagram, data.diagram);
-// drawDiagram(container2, data2.entities, data2.diagram.relationsOnDiagram, data2.diagram);
-// drawDiagram(container3, data3.entities, data3.diagram.relationsOnDiagram, data3.diagram);
-drawDiagram(container, data4.entities, data4.diagram.relationsOnDiagram, data4.diagram);
-// drawDiagram(container5, data5.entities, data5.diagram.relationsOnDiagram, data5.diagram);
+const arrData = [
+    data, data2, data3, data4, data5
+];
+arrData.forEach((data, index) => {
+    const container = document.createElement('div');
+    container.setAttribute('class', `diagram-container`);
+    document.getElementsByTagName('body')[0].appendChild(container);
+    drawDiagram(container, data.entities, data.diagram.relationsOnDiagram, data.diagram);
+});
 function drawDiagram(container, entities, relations, diagram) {
     entities.forEach(e => drawEntity(e, container, diagram));
     relations.forEach(r => drawRelation(r, container, diagram));
@@ -815,7 +814,7 @@ function drawEntity(entity, container, diagram) {
     }
 }
 function drawRelation(relation, container, diagram) {
-    d3.select(container).append('svg');
+    const svg = d3.select(container).append('svg');
     createOne2OneStart();
     createOne2OneEnd();
     createOne2ManyEnd();
@@ -823,7 +822,7 @@ function drawRelation(relation, container, diagram) {
     const endRect = getEntityRect(diagram, relation.endPosition.name);
     const startPoint = calcRelationPoint(relation.startPosition, startRect);
     const endPoint = calcRelationPoint(relation.endPosition, endRect);
-    d3.select('svg').append('path')
+    svg.append('path')
         .attr("d", `M ${startPoint.x},${startPoint.y} L ${endPoint.x},${endPoint.y}`)
         .attr("marker-start", "url(#o2oStart)")
         .attr("marker-end", "url(#o2mEnd");
