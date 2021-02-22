@@ -16,138 +16,379 @@ import * as d3 from 'https://unpkg.com/d3?module';
 
 const data: Component = {
   entities: [{
-    name: "user",
+    name: "Loan_Request",
     columns: [{
       id: 1,
-      field: "Bob"
+      field: "Borrower"
     }, {
       id: 2,
-      field: "John"
+      field: "Deadline"
     }, {
       id: 3,
-      field: "Tom"
+      field: "Amount"
     }]
   }, {
-    name: "country",
+    name: "Borrower",
     columns: [{
       id: 1,
-      field: "USA"
+      field: "ID"
     }, {
       id: 2,
-      field: "Canada"
-    }, {
-      id: 3,
-      field: "England"
+      field: "Addressee_ID"
     }]
   }, {
-    name: "cities",
+    name: "Addressee",
     columns: [{
       id: 1,
-      field: "New York"
+      field: "ID"
     }, {
       id: 2,
-      field: "Toronto"
+      field: "Name"
     }, {
       id: 3,
-      field: "York"
+      field: "Address"
     }]
   }, {
-    name: "capital",
+    name: "Intermediary",
     columns: [{
       id: 1,
-      field: "Washington"
+      field: "ID"
     }, {
       id: 2,
-      field: "Ottawa"
+      field: "Address_ID"
     }, {
       id: 3,
-      field: "London"
+      field: "LoanDate"
     }]
-  } ],
-  relations: [ {
-    name: 'UserToCountry',
+  }, {
+    name: "Lender",
+    columns: [{
+      id: 1,
+      field: "ID"
+    }, {
+      id: 2,
+      field: "Address_ID"
+    }]
+  }, {
+    name: "Lender_Borrower",
+    columns: [{
+      id: 1,
+      field: "Borrower_ID"
+    }, {
+      id: 2,
+      field: "Lender_ID"
+    }, {
+      id: 3,
+      field: "Percentage"
+    }]
+  }, {
+    name: "Loan_Request_Lender",
+    columns: [{
+      id: 1,
+      field: "Loan_RequestDate"
+    }, {
+      id: 2,
+      field: "Lender_ID"
+    }, {
+      id: 3,
+      field: "Amount"
+    }]
+  }, {
+    name: "Repayment",
+    columns: [{
+      id: 1,
+      field: "Date"
+    }, {
+      id: 2,
+      field: "Amount"
+    }]
+  }, {
+    name: "Loan",
+    columns: [{
+      id: 1,
+      field: "Date"
+    }, {
+      id: 2,
+      field: "DeadlineAgreed_Date"
+    }, {
+      id: 3,
+      field: "RepaymentDate"
+    }]
+  }, {
+    name: "Deadline",
+    columns: [{
+      id: 1,
+      field: "Agreed_Date"
+    }]
+  }],
+  relations: [{
+    name: 'BorrowerToLoan_Request',
     type: RelationTypeEnum.OneToMany,
-    from: "user",
-    to: "country"
+    from: "Borrower",
+    to: "Loan_Request"
   }, {
-    name: 'CountryToCapital',
+    name: 'BorrowerToLender_Borrower',
+    type: RelationTypeEnum.OneToMany,
+    from: "Borrower",
+    to: "Lender_Borrower"
+  }, {
+    name: 'BorrowerToAddressee',
     type: RelationTypeEnum.OneToOne,
-    from: "country",
-    to: "capital"
+    from: "Borrower",
+    to: "Addressee"
   }, {
-    name: 'CountryToCities',
+    name: 'AddresseeToLender',
+    type: RelationTypeEnum.OneToOne,
+    from: "Addressee",
+    to: "Lender"
+  }, {
+    name: 'AddresseeToIntermediary',
+    type: RelationTypeEnum.OneToOne,
+    from: "Addressee",
+    to: "Intermediary"
+  }, {
+    name: 'IntermediaryToLoan',
+    type: RelationTypeEnum.OneToOne,
+    from: "Intermediary",
+    to: "Loan"
+  }, {
+    name: 'RepaymentToLoan',
     type: RelationTypeEnum.OneToMany,
-    from: "country",
-    to: "cities"
+    from: "Repayment",
+    to: "Loan"
+  }, {
+    name: 'DeadlineToLoan',
+    type: RelationTypeEnum.OneToMany,
+    from: "Deadline",
+    to: "Loan"
+  }, {
+    name: 'LoanToLender_Borrower',
+    type: RelationTypeEnum.OneToOne,
+    from: "Loan",
+    to: "Lender_Borrower"
+  }, {
+    name: 'Loan_RequestToLoan_Request_Lender',
+    type: RelationTypeEnum.OneToMany,
+    from: "Loan",
+    to: "Loan_Request_Lender"
+  }, {
+    name: 'LenderToLender_Borrower',
+    type: RelationTypeEnum.OneToMany,
+    from: "Lender",
+    to: "Loan"
   } ],
   diagram: {
     entitiesOnDiagram: [{
-      name: "user",
+      name: "Loan_Request",
       rect: {
         top: 20,
         left: 20,
-        width: 100,
-        height: 100
+        width: 150,
+        height: 150
       }
     }, {
-      name: "country",
+      name: "Borrower",
       rect: {
-        top: 20,
-        left: 240,
-        width: 100,
-        height: 100
+        top: 5,
+        left: 320,
+        width: 150,
+        height: 150
       }
     }, {
-      name: "cities",
+      name: "Addressee",
       rect: {
-        top: 20,
-        left: 460,
-        width: 100,
-        height: 100
+        top: 30,
+        left: 560,
+        width: 150,
+        height: 150
       }
     }, {
-      name: "capital",
+      name: "Intermediary",
+      rect: {
+        top: 180,
+        left: 840,
+        width: 150,
+        height: 150
+      }
+    }, {
+      name: "Lender",
       rect: {
         top: 200,
-        left: 240,
+        left: 600,
+        width: 150,
+        height: 150
+      }
+    }, {
+      name: "Lender_Borrower",
+      rect: {
+        top: 180,
+        left: 280,
+        width: 150,
+        height: 150
+      }
+    }, {
+      name: "Loan_Request_Lender",
+      rect: {
+        top: 200,
+        left: 20,
+        width: 150,
+        height: 150
+      }
+    }, {
+      name: "Loan",
+      rect: {
+        top: 440,
+        left: 270,
+        width: 150,
+        height: 150
+      }
+    }, {
+      name: "Repayment",
+      rect: {
+        top: 500,
+        left: 20,
+        width: 150,
+        height: 150
+      }
+    }, {
+      name: "Deadline",
+      rect: {
+        top: 420,
+        left: 500,
         width: 100,
         height: 100
       }
     }],
     relationsOnDiagram: [{
-      name: "UserToCountry",
+      name: "BorrowerToLoan_Request",
       startPosition: {
-        name: "user",
-        side: SideEnum.Right,
+        name: "Borrower",
+        side: SideEnum.Left,
         shiftInPercent: 50
       },
       endPosition: {
-        name: "country",
-        side: SideEnum.Left,
+        name: "Loan_Request",
+        side: SideEnum.Right,
         shiftInPercent: 50
       }
     }, {
-      name: "CountryToCapital",
+      name: "BorrowerToLender_Borrower",
       startPosition: {
-        name: "country",
+        name: "Borrower",
         side: SideEnum.Bottom,
         shiftInPercent: 50
       },
       endPosition: {
-        name: "capital",
+        name: "Lender_Borrower",
         side: SideEnum.Top,
-        shiftInPercent: 50
+        shiftInPercent: 30
       }
     }, {
-      name: "CountryToCities",
+      name: "BorrowerToAddressee",
       startPosition: {
-        name: "country",
+        name: "Borrower",
         side: SideEnum.Right,
         shiftInPercent: 50
       },
       endPosition: {
-        name: "cities",
+        name: "Addressee",
         side: SideEnum.Left,
+        shiftInPercent: 50
+      }
+    }, {
+      name: "AddresseeToLender",
+      startPosition: {
+        name: "Addressee",
+        side: SideEnum.Bottom,
+        shiftInPercent: 50
+      },
+      endPosition: {
+        name: "Lender",
+        side: SideEnum.Top,
+        shiftInPercent: 50
+      }
+    }, {
+      name: "AddresseeToIntermediary",
+      startPosition: {
+        name: "Addressee",
+        side: SideEnum.Right,
+        shiftInPercent: 50
+      },
+      endPosition: {
+        name: "Intermediary",
+        side: SideEnum.Top,
+        shiftInPercent: 50
+      }
+    }, {
+      name: "IntermediaryToLoan",
+      startPosition: {
+        name: "Intermediary",
+        side: SideEnum.Bottom,
+        shiftInPercent: 50
+      },
+      endPosition: {
+        name: "Loan",
+        side: SideEnum.Right,
+        shiftInPercent: 70
+      }
+    }, {
+      name: "RepaymentToLoan",
+      startPosition: {
+        name: "Repayment",
+        side: SideEnum.Right,
+        shiftInPercent: 50
+      },
+      endPosition: {
+        name: "Loan",
+        side: SideEnum.Left,
+        shiftInPercent: 50
+      }
+    }, {
+      name: "DeadlineToLoan",
+      startPosition: {
+        name: "Deadline",
+        side: SideEnum.Left,
+        shiftInPercent: 50
+      },
+      endPosition: {
+        name: "Loan",
+        side: SideEnum.Right,
+        shiftInPercent: 50
+      }
+    }, {
+      name: "LoanToLender_Borrower",
+      startPosition: {
+        name: "Loan",
+        side: SideEnum.Top,
+        shiftInPercent: 50
+      },
+      endPosition: {
+        name: "Lender_Borrower",
+        side: SideEnum.Bottom,
+        shiftInPercent: 50
+      }
+    }, {
+      name: "LenderToLender_Borrower",
+      startPosition: {
+        name: "Lender",
+        side: SideEnum.Left,
+        shiftInPercent: 50
+      },
+      endPosition: {
+        name: "Lender_Borrower",
+        side: SideEnum.Right,
+        shiftInPercent: 70
+      }
+    }, {
+      name: "Loan_RequestToLoan_Request_Lender",
+      startPosition: {
+        name: "Loan_Request",
+        side: SideEnum.Bottom,
+        shiftInPercent: 50
+      },
+      endPosition: {
+        name: "Loan_Request_Lender",
+        side: SideEnum.Top,
         shiftInPercent: 50
       }
     }]
@@ -204,10 +445,10 @@ const data2: Component = {
     }]
   } ],
   relations: [ {
-    name: 'StudentToCourse',
+    name: 'CourseToStudent',
     type: RelationTypeEnum.OneToMany,
-    from: "student",
-    to: "course"
+    from: "course",
+    to: "student"
   }, {
     name: 'ProfessorToCourse',
     type: RelationTypeEnum.OneToMany,
@@ -259,15 +500,15 @@ const data2: Component = {
       }
     }],
     relationsOnDiagram: [{
-      name: "StudentToCourse",
+      name: "CourseToStudent",
       startPosition: {
-        name: "student",
-        side: SideEnum.Right,
+        name: "course",
+        side: SideEnum.Left,
         shiftInPercent: 50
       },
       endPosition: {
-        name: "course",
-        side: SideEnum.Left,
+        name: "student",
+        side: SideEnum.Right,
         shiftInPercent: 50
       }
     }, {
@@ -813,7 +1054,7 @@ const data5: Component = {
 };
 
 const arrData = [
-  data, data2, data3, data4, data5
+  data//, data2, data3, data4, data5
 ];
 
 arrData.forEach(data => {
@@ -869,14 +1110,27 @@ function getRelationType(relations: IRelation[], name: string): RelationTypeEnum
   return relationType === null ? null : relationType.type
 }
 
+
+
 function drawRelation(relationOnDiagram: IRelationOnDiagram, container: Element, diagram: IDiagram, relationType: RelationTypeEnum): void {
   const svg = d3.select(container).select('svg');
   const startRect = getEntityRect(diagram, relationOnDiagram.startPosition.name);
   const endRect = getEntityRect(diagram, relationOnDiagram.endPosition.name);
   const startPoint = calcRelationPoint(relationOnDiagram.startPosition, startRect);
   const endPoint = calcRelationPoint(relationOnDiagram.endPosition, endRect);
+
+  const startSide = relationOnDiagram.startPosition.side;
+  const endSide = relationOnDiagram.endPosition.side;
+
+  const middlePoint = calcMiddlePoint(startSide, endSide, startPoint, endPoint);
+
   const path = svg.append('path')
-    .attr("d", `M ${startPoint.x},${startPoint.y} L ${endPoint.x},${endPoint.y}`);
+    .attr('fill', 'none');
+
+
+    path.attr("d", `M ${startPoint.x},${startPoint.y} L ${endPoint.x},${endPoint.y}`);
+
+
 
   switch (relationType) {
     case RelationTypeEnum.OneToMany:
@@ -917,6 +1171,23 @@ function calcRelationPoint(position: IRelationPosition, rect: IRect): IPoint {
   return {x: x, y: y}
 }
 
+function calcMiddlePoint(startSide: SideEnum, endSide: SideEnum, start: IPoint, end: IPoint): IPoint {
+  let x;
+  let y;
+  if(startSide === SideEnum.Right && endSide === SideEnum.Top  || startSide === SideEnum.Left && endSide === SideEnum.Top || startSide === SideEnum.Right && endSide === SideEnum.Bottom || startSide === SideEnum.Left && endSide === SideEnum.Bottom) {
+    if(start.y < end.y || start.y < end.y) {
+      x = end.x;
+      y = start.y;
+    } else {
+      x = null;
+      y = null;
+    }
+  }
+  return {
+    x: x,
+    y: y
+  }
+}
 
 function createOne2OneStart(container: Element): void {
   const marker = d3.select(container).select('svg').append('marker')
