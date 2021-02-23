@@ -1,20 +1,6 @@
-import {
-  Component,
-  IDiagram,
-  IEntity,
-  IPoint,
-  IRect,
-  IRelation,
-  IRelationOnDiagram,
-  IRelationPosition,
-  RelationTypeEnum,
-  SideEnum
-} from "./interfaces.js";
-// @ts-ignore
-import * as d3 from 'https://unpkg.com/d3?module';
+import {RelationTypeEnum, SideEnum} from "../interfaces/interfaces.js";
 
-
-const data: Component = {
+export const data = {
   entities: [{
     name: "Loan_Request",
     columns: [{
@@ -222,24 +208,24 @@ const data: Component = {
       name: "Lender_Borrower",
       rect: {
         top: 230,
-        left: 280,
+        left: 300,
         width: 150,
         height: 150
       }
     }, {
       name: "Loan_Request_Lender",
       rect: {
-        top: 200,
-        left: 20,
+        top: 230,
+        left: 130,
         width: 150,
         height: 150
       }
     }, {
       name: "Loan",
       rect: {
-        top: 440,
+        top: 480,
         left: 270,
-        width: 150,
+        width: 180,
         height: 150
       }
     }, {
@@ -388,13 +374,305 @@ const data: Component = {
       },
       endPosition: {
         name: "Loan_Request_Lender",
-        side: SideEnum.Top,
+        side: SideEnum.Left,
         shiftInPercent: 50
       }
     }]
   }
 };
-const data2: Component = {
+export const data2 = {
+  entities: [{
+    name: "Supplier",
+    columns: [{
+      id: 1,
+      field: "Delivery_ID"
+    }, {
+      id: 2,
+      field: "Delivery_Date"
+    }, {
+      id: 3,
+      field: "Supplier_ID"
+    }]
+  }, {
+    name: "Delivery",
+    columns: [ {
+      id: 1,
+      field: "Delivery_ID"
+    }, {
+      id: 2,
+      field: "Delivery_Date"
+    }, {
+      id: 3,
+      field: "Supplier_ID"
+    } ]
+  }, {
+    name: "Order_Detail_Delivery",
+    columns: [{
+      id: 1,
+      field: "Delivery_ID"
+    }, {
+      id: 2,
+      field: "Order_ID"
+    }, {
+      id: 3,
+      field: "Order_Detail_ID"
+    }]
+  }, {
+    name: "Product",
+    columns: [{
+      id: 1,
+      field: "Product_ID"
+    }, {
+      id: 2,
+      field: "Supplier_ID"
+    }]
+  }, {
+    name: "Order_Detail",
+    columns: [{
+      id: 1,
+      field: "Order_Detail_ID"
+    }, {
+      id: 2,
+      field: "Product_ID"
+    }, {
+      id: 3,
+      field: "Order_ID"
+    }]
+  }, {
+    name: "Order",
+    columns: [{
+      id: 1,
+      field: "Order_ID"
+    }, {
+      id: 2,
+      field: "Order_Date"
+    }, {
+      id: 3,
+      field: "Headquarters_ID"
+    }]
+  }, {
+    name: "Headquarters",
+    columns: [{
+      id: 1,
+      field: "Headquarters_ID"
+    }, {
+      id: 2,
+      field: "Branch_ID"
+    }]
+  }, {
+    name: "Branch",
+    columns: [{
+      id: 1,
+      field: "Branch_ID"
+    }]
+  } ],
+  relations: [ {
+    name: "SupplierToDelivery",
+    type: RelationTypeEnum.OneToMany,
+    from: "Supplier",
+    to: "Delivery"
+  }, {
+    name: "DeliveryToOrder_Detail_Delivery",
+    type: RelationTypeEnum.OneToMany,
+    from: "Delivery",
+    to: "Order_Detail_Delivery"
+  }, {
+    name: "Order_DetailToOrder_Detail_Delivery",
+    type: RelationTypeEnum.OneToMany,
+    from: "Order_Detail",
+    to: "Order_Detail_Delivery"
+  }, {
+    name: "SupplierToProduct",
+    type: RelationTypeEnum.OneToMany,
+    from: "Supplier",
+    to: "Product"
+  }, {
+    name: "ProductToOrder_Detail",
+    type: RelationTypeEnum.OneToMany,
+    from: "Product",
+    to: "Order_Detail"
+  }, {
+    name: "OrderToOrder_Detail",
+    type: RelationTypeEnum.OneToMany,
+    from: "Order",
+    to: "Order_Detail"
+  }, {
+    name: "OrderToHeadquarters",
+    type: RelationTypeEnum.OneToOne,
+    from: "Order",
+    to: "Headquarters"
+  }, {
+    name: "HeadquartersToBranch",
+    type: RelationTypeEnum.OneToMany,
+    from: "Headquarters",
+    to: "Branch"
+  }  ],
+  diagram: {
+    entitiesOnDiagram: [{
+      name: "Supplier",
+      rect: {
+        top: 80,
+        left: 20,
+        width: 150,
+        height: 100
+      }
+    }, {
+      name: "Delivery",
+      rect: {
+        top: 80,
+        left: 240,
+        width: 150,
+        height: 100
+      }
+    }, {
+      name: "Order_Detail_Delivery",
+      rect: {
+        top: 0,
+        left: 560,
+        width: 150,
+        height: 100
+      }
+    }, {
+      name: "Product",
+      rect: {
+        top: 250,
+        left: 0,
+        width: 150,
+        height: 100
+      }
+    }, {
+      name: "Order_Detail",
+      rect: {
+        top: 220,
+        left: 270,
+        width: 150,
+        height: 100
+      }
+    }, {
+      name: "Order",
+      rect: {
+        top: 300,
+        left: 500,
+        width: 150,
+        height: 100
+      }
+    }, {
+      name: "Headquarters",
+      rect: {
+        top: 500,
+        left: 460,
+        width: 150,
+        height: 80
+      }
+    }, {
+      name: "Branch",
+      rect: {
+        top: 450,
+        left: 100,
+        width: 150,
+        height: 80
+      }
+    }],
+    relationsOnDiagram: [{
+      name: "SupplierToDelivery",
+      startPosition: {
+        name: "Supplier",
+        side: SideEnum.Top,
+        shiftInPercent: 50
+      },
+      endPosition: {
+        name: "Delivery",
+        side: SideEnum.Left,
+        shiftInPercent: 50
+      }
+    }, {
+      name: "DeliveryToOrder_Detail_Delivery",
+      startPosition: {
+        name: "Delivery",
+        side: SideEnum.Right,
+        shiftInPercent: 20
+      },
+      endPosition: {
+        name: "Order_Detail_Delivery",
+        side: SideEnum.Top,
+        shiftInPercent: 50
+      }
+    }, {
+      name: "Order_DetailToOrder_Detail_Delivery",
+      startPosition: {
+        name: "Order_Detail",
+        side: SideEnum.Top,
+        shiftInPercent: 50
+      },
+      endPosition: {
+        name: "Order_Detail_Delivery",
+        side: SideEnum.Bottom,
+        shiftInPercent: 50
+      }
+    }, {
+      name: "SupplierToProduct",
+      startPosition: {
+        name: "Supplier",
+        side: SideEnum.Bottom,
+        shiftInPercent: 50
+      },
+      endPosition: {
+        name: "Product",
+        side: SideEnum.Top,
+        shiftInPercent: 50
+      }
+    }, {
+      name: "ProductToOrder_Detail",
+      startPosition: {
+        name: "Product",
+        side: SideEnum.Right,
+        shiftInPercent: 50
+      },
+      endPosition: {
+        name: "Order_Detail",
+        side: SideEnum.Bottom,
+        shiftInPercent: 50
+      }
+    }, {
+      name: "OrderToOrder_Detail",
+      startPosition: {
+        name: "Order",
+        side: SideEnum.Left,
+        shiftInPercent: 50
+      },
+      endPosition: {
+        name: "Order_Detail",
+        side: SideEnum.Right,
+        shiftInPercent: 50
+      }
+    }, {
+      name: "OrderToHeadquarters",
+      startPosition: {
+        name: "Order",
+        side: SideEnum.Right,
+        shiftInPercent: 50
+      },
+      endPosition: {
+        name: "Headquarters",
+        side: SideEnum.Bottom,
+        shiftInPercent: 50
+      }
+    }, {
+      name: "HeadquartersToBranch",
+      startPosition: {
+        name: "Headquarters",
+        side: SideEnum.Left,
+        shiftInPercent: 50
+      },
+      endPosition: {
+        name: "Branch",
+        side: SideEnum.Bottom,
+        shiftInPercent: 50
+      }
+    }]
+  }
+};
+export const data3 = {
   entities: [{
     name: "student",
     columns: [{
@@ -443,302 +721,6 @@ const data2: Component = {
       id: 3,
       field: "G-3"
     }]
-  } ],
-  relations: [ {
-    name: 'CourseToStudent',
-    type: RelationTypeEnum.OneToMany,
-    from: "course",
-    to: "student"
-  }, {
-    name: 'ProfessorToCourse',
-    type: RelationTypeEnum.OneToMany,
-    from: "professor",
-    to: "course"
-  }, {
-    name: 'CourseToGroup',
-    type: RelationTypeEnum.OneToMany,
-    from: "course",
-    to: "group"
-  }, {
-    name: 'GroupToStudent',
-    type: RelationTypeEnum.OneToMany,
-    from: "group",
-    to: "student"
-  } ],
-  diagram: {
-    entitiesOnDiagram: [{
-      name: "student",
-      rect: {
-        top: 120,
-        left: 20,
-        width: 100,
-        height: 100
-      }
-    }, {
-      name: "course",
-      rect: {
-        top: 80,
-        left: 240,
-        width: 100,
-        height: 100
-      }
-    }, {
-      name: "professor",
-      rect: {
-        top: 20,
-        left: 460,
-        width: 100,
-        height: 100
-      }
-    }, {
-      name: "group",
-      rect: {
-        top: 250,
-        left: 240,
-        width: 100,
-        height: 100
-      }
-    }],
-    relationsOnDiagram: [{
-      name: "CourseToStudent",
-      startPosition: {
-        name: "course",
-        side: SideEnum.Left,
-        shiftInPercent: 50
-      },
-      endPosition: {
-        name: "student",
-        side: SideEnum.Right,
-        shiftInPercent: 50
-      }
-    }, {
-      name: "ProfessorToCourse",
-      startPosition: {
-        name: "professor",
-        side: SideEnum.Left,
-        shiftInPercent: 50
-      },
-      endPosition: {
-        name: "course",
-        side: SideEnum.Right,
-        shiftInPercent: 50
-      }
-    }, {
-      name: "CourseToGroup",
-      startPosition: {
-        name: "course",
-        side: SideEnum.Bottom,
-        shiftInPercent: 50
-      },
-      endPosition: {
-        name: "group",
-        side: SideEnum.Top,
-        shiftInPercent: 50
-      }
-    }, {
-      name: "GroupToStudent",
-      startPosition: {
-        name: "group",
-        side: SideEnum.Left,
-        shiftInPercent: 50
-      },
-      endPosition: {
-        name: "student",
-        side: SideEnum.Bottom,
-        shiftInPercent: 50
-      }
-    }]
-  }
-};
-const data3: Component = {
-  entities: [{
-    name: "employer",
-    columns: [{
-      id: 1,
-      field: "Bob"
-    }, {
-      id: 2,
-      field: "John"
-    }, {
-      id: 3,
-      field: "Tom"
-    }]
-  }, {
-    name: "employee",
-    columns: [{
-      id: 1,
-      field: "Adam"
-    }, {
-      id: 2,
-      field: "Paul"
-    }, {
-      id: 3,
-      field: "Howard"
-    }]
-  }, {
-    name: "position",
-    columns: [{
-      id: 1,
-      field: "QA"
-    }, {
-      id: 2,
-      field: "Developer"
-    }, {
-      id: 3,
-      field: "HR"
-    }]
-  }, {
-    name: "office",
-    columns: [{
-      id: 1,
-      field: "London"
-    }, {
-      id: 2,
-      field: "New York"
-    }, {
-      id: 3,
-      field: "Tokyo"
-    }]
-  }, {
-    name: "customer",
-    columns: [{
-      id: 1,
-      field: "Spencer"
-    }, {
-      id: 2,
-      field: "Smith"
-    }, {
-      id: 3,
-      field: "Tokugawa"
-    }]
-  } ],
-  relations: [ {
-    name: "EmployerToEmployee",
-    type: RelationTypeEnum.OneToMany,
-    from: "employer",
-    to: "employee"
-  }, {
-    name: "PositionToEmployee",
-    type: RelationTypeEnum.OneToMany,
-    from: "position",
-    to: "employee"
-  }, {
-    name: "OfficeToEmployee",
-    type: RelationTypeEnum.OneToMany,
-    from: "office",
-    to: "employee"
-  }, {
-    name: "EmployerToCustomer",
-    type: RelationTypeEnum.OneToMany,
-    from: "employer",
-    to: "customer"
-  } ],
-  diagram: {
-    entitiesOnDiagram: [{
-      name: "employer",
-      rect: {
-        top: 20,
-        left: 20,
-        width: 100,
-        height: 100
-      }
-    }, {
-      name: "employee",
-      rect: {
-        top: 80,
-        left: 240,
-        width: 100,
-        height: 100
-      }
-    }, {
-      name: "position",
-      rect: {
-        top: 20,
-        left: 460,
-        width: 100,
-        height: 100
-      }
-    }, {
-      name: "office",
-      rect: {
-        top: 250,
-        left: 440,
-        width: 100,
-        height: 100
-      }
-    }, {
-      name: "customer",
-      rect: {
-        top: 250,
-        left: 20,
-        width: 100,
-        height: 100
-      }
-    }],
-    relationsOnDiagram: [{
-      name: "EmployerToEmployee",
-      startPosition: {
-        name: "employer",
-        side: SideEnum.Right,
-        shiftInPercent: 50
-      },
-      endPosition: {
-        name: "employee",
-        side: SideEnum.Left,
-        shiftInPercent: 50
-      }
-    }, {
-      name: "PositionToEmployee",
-      startPosition: {
-        name: "position",
-        side: SideEnum.Left,
-        shiftInPercent: 50
-      },
-      endPosition: {
-        name: "employee",
-        side: SideEnum.Right,
-        shiftInPercent: 30
-      }
-    }, {
-      name: "OfficeToEmployee",
-      startPosition: {
-        name: "office",
-        side: SideEnum.Left,
-        shiftInPercent: 50
-      },
-      endPosition: {
-        name: "employee",
-        side: SideEnum.Bottom,
-        shiftInPercent: 50
-      }
-    }, {
-      name: "EmployerToCustomer",
-      startPosition: {
-        name: "employer",
-        side: SideEnum.Bottom,
-        shiftInPercent: 50
-      },
-      endPosition: {
-        name: "customer",
-        side: SideEnum.Top,
-        shiftInPercent: 50
-      }
-    }]
-  }
-};
-const data4: Component = {
-  entities: [{
-    name: "student",
-    columns: [{
-      id: 1,
-      field: "Bob"
-    }, {
-      id: 2,
-      field: "John"
-    }, {
-      id: 3,
-      field: "Tom"
-    }]
   }, {
     name: "progress",
     columns: [{
@@ -786,10 +768,30 @@ const data4: Component = {
     }]
   } ],
   relations: [ {
+    name: 'CourseToStudent',
+    type: RelationTypeEnum.OneToMany,
+    from: "course",
+    to: "student"
+  }, {
     name: "StudentToProgress",
+    type: RelationTypeEnum.OneToMany,
+    from: "course",
+    to: "student"
+  }, {
+    name: 'ProfessorToCourse',
     type: RelationTypeEnum.OneToMany,
     from: "student",
     to: "progress"
+  }, {
+    name: 'CourseToGroup',
+    type: RelationTypeEnum.OneToMany,
+    from: "course",
+    to: "group"
+  }, {
+    name: 'GroupToStudent',
+    type: RelationTypeEnum.OneToMany,
+    from: "group",
+    to: "student"
   }, {
     name: "SubjectToProgress",
     type: RelationTypeEnum.OneToMany,
@@ -810,54 +812,126 @@ const data4: Component = {
     type: RelationTypeEnum.OneToMany,
     from: "speciality",
     to: "student"
-  } ],
+  }  ],
   diagram: {
     entitiesOnDiagram: [{
       name: "student",
       rect: {
         top: 120,
-        left: 20,
-        width: 100,
+        left: 180,
+        width: 150,
+        height: 100
+      }
+    }, {
+      name: "course",
+      rect: {
+        top: 120,
+        left: 440,
+        width: 150,
+        height: 100
+      }
+    }, {
+      name: "professor",
+      rect: {
+        top: 20,
+        left: 610,
+        width: 150,
+        height: 100
+      }
+    }, {
+      name: "group",
+      rect: {
+        top: 350,
+        left: 10,
+        width: 150,
         height: 100
       }
     }, {
       name: "progress",
       rect: {
-        top: 120,
-        left: 460,
-        width: 100,
-        height: 100
+        top: 0,
+        left: 450,
+        width: 80,
+        height: 80
       }
     }, {
       name: "subject",
       rect: {
-        top: 20,
-        left: 240,
-        width: 100,
+        top: 0,
+        left: 0,
+        width: 150,
         height: 100
       }
     }, {
       name: "faculty",
       rect: {
         top: 250,
-        left: 440,
-        width: 100,
+        left: 540,
+        width: 150,
         height: 100
       }
     }, {
       name: "speciality",
       rect: {
         top: 350,
-        left: 250,
-        width: 100,
+        left: 350,
+        width: 150,
         height: 100
       }
     }],
     relationsOnDiagram: [{
+      name: "CourseToStudent",
+      startPosition: {
+        name: "course",
+        side: SideEnum.Left,
+        shiftInPercent: 50
+      },
+      endPosition: {
+        name: "student",
+        side: SideEnum.Right,
+        shiftInPercent: 30
+      }
+    }, {
+      name: "ProfessorToCourse",
+      startPosition: {
+        name: "professor",
+        side: SideEnum.Left,
+        shiftInPercent: 50
+      },
+      endPosition: {
+        name: "course",
+        side: SideEnum.Right,
+        shiftInPercent: 50
+      }
+    }, {
+      name: "CourseToGroup",
+      startPosition: {
+        name: "course",
+        side: SideEnum.Bottom,
+        shiftInPercent: 50
+      },
+      endPosition: {
+        name: "group",
+        side: SideEnum.Top,
+        shiftInPercent: 50
+      }
+    }, {
+      name: "GroupToStudent",
+      startPosition: {
+        name: "group",
+        side: SideEnum.Right,
+        shiftInPercent: 50
+      },
+      endPosition: {
+        name: "student",
+        side: SideEnum.Bottom,
+        shiftInPercent: 30
+      }
+    }, {
       name: "StudentToProgress",
       startPosition: {
         name: "student",
-        side: SideEnum.Right,
+        side: SideEnum.Top,
         shiftInPercent: 50
       },
       endPosition: {
@@ -882,7 +956,7 @@ const data4: Component = {
       startPosition: {
         name: "faculty",
         side: SideEnum.Left,
-        shiftInPercent: 50
+        shiftInPercent: 30
       },
       endPosition: {
         name: "student",
@@ -911,339 +985,219 @@ const data4: Component = {
       endPosition: {
         name: "student",
         side: SideEnum.Bottom,
-        shiftInPercent: 50
+        shiftInPercent: 70
       }
-    }]
+    } ]
   }
 };
-const data5: Component = {
+export const data4 = {
   entities: [{
-    name: "customer",
+    name: "Album",
     columns: [{
       id: 1,
-      field: "Bob"
+      field: "ID"
     }, {
       id: 2,
-      field: "John"
+      field: "Title"
     }, {
       id: 3,
-      field: "Tom"
+      field: "Description"
     }]
   }, {
-    name: "order",
+    name: "Location",
     columns: [{
       id: 1,
-      field: "barcode"
+      field: "ID"
     }, {
       id: 2,
-      field: "title"
+      field: "Name"
+    }, {
+      id: 3,
+      field: "ShortName"
+    }]
+  }, {
+    name: "Photo",
+    columns: [{
+      id: 1,
+      field: "ID"
+    }, {
+      id: 2,
+      field: "Title"
+    }, {
+      id: 3,
+      field: "UploadDate"
+    }]
+  }, {
+    name: "Member",
+    columns: [{
+      id: 1,
+      field: "ID"
+    }, {
+      id: 2,
+      field: "Name"
+    }, {
+      id: 3,
+      field: "PhoneNum"
+    }]
+  }, {
+    name: "Comment",
+    columns: [{
+      id: 1,
+      field: "ID"
+    }, {
+      id: 2,
+      field: "PostDate"
+    }, {
+      id: 3,
+      field: "Content"
+    }]
+  }, {
+    name: "Tag",
+    columns: [{
+      id: 1,
+      field: "ID"
+    }, {
+      id: 2,
+      field: "Title"
     } ]
-  }, {
-    name: "courier",
-    columns: [{
-      id: 1,
-      field: "Adam"
-    }, {
-      id: 2,
-      field: "Steven"
-    }, {
-      id: 3,
-      field: "William"
-    }]
-  }, {
-    name: "product",
-    columns: [{
-      id: 1,
-      field: "phone"
-    }, {
-      id: 2,
-      field: "laptop"
-    }, {
-      id: 3,
-      field: "headset"
-    }]
   } ],
   relations: [ {
-    name: "CustomerToOrder",
+    name: "AlbumToPhoto",
     type: RelationTypeEnum.OneToMany,
-    from: "customer",
-    to: "order"
+    from: "Album",
+    to: "Photo"
   }, {
-    name: "CourierToOrder",
-    type: RelationTypeEnum.OneToOne,
-    from: "courier",
-    to: "order"
-  }, {
-    name: "OrderToProduct",
+    name: "LocationToPhoto",
     type: RelationTypeEnum.OneToMany,
-    from: "order",
-    to: "product"
+    from: "Location",
+    to: "Photo"
+  }, {
+    name: "TagToPhoto",
+    type: RelationTypeEnum.OneToMany,
+    from: "Tag",
+    to: "Photo"
+  }, {
+    name: "MemberToPhoto",
+    type: RelationTypeEnum.OneToMany,
+    from: "Member",
+    to: "Photo"
+  }, {
+    name: "PhotoToComment",
+    type: RelationTypeEnum.OneToMany,
+    from: "Photo",
+    to: "Comment"
   } ],
   diagram: {
     entitiesOnDiagram: [{
-      name: "customer",
+      name: "Album",
       rect: {
         top: 20,
-        left: 20,
-        width: 100,
+        left: 120,
+        width: 150,
         height: 100
       }
     }, {
-      name: "order",
-      rect: {
-        top: 320,
-        left: 240,
-        width: 100,
-        height: 100
-      }
-    }, {
-      name: "courier",
-      rect: {
-        top: 520,
-        left: 60,
-        width: 100,
-        height: 100
-      }
-    }, {
-      name: "product",
+      name: "Location",
       rect: {
         top: 100,
-        left: 440,
-        width: 100,
+        left: 540,
+        width: 150,
         height: 100
+      }
+    }, {
+      name: "Photo",
+      rect: {
+        top: 150,
+        left: 300,
+        width: 150,
+        height: 100
+      }
+    }, {
+      name: "Member",
+      rect: {
+        top: 250,
+        left: 540,
+        width: 150,
+        height: 100
+      }
+    }, {
+      name: "Comment",
+      rect: {
+        top: 250,
+        left: 20,
+        width: 150,
+        height: 100
+      }
+    }, {
+      name: "Tag",
+      rect: {
+        top: 350,
+        left: 220,
+        width: 80,
+        height: 80
       }
     }],
     relationsOnDiagram: [{
-      name: "CustomerToOrder",
+      name: "AlbumToPhoto",
       startPosition: {
-        name: "customer",
-        side: SideEnum.Bottom,
+        name: "Album",
+        side: SideEnum.Left,
         shiftInPercent: 50
       },
       endPosition: {
-        name: "order",
-        side: SideEnum.Top,
+        name: "Photo",
+        side: SideEnum.Left,
         shiftInPercent: 50
       }
     }, {
-      name: "CourierToOrder",
+      name: "LocationToPhoto",
       startPosition: {
-        name: "courier",
+        name: "Location",
         side: SideEnum.Top,
         shiftInPercent: 50
       },
       endPosition: {
-        name: "order",
+        name: "Photo",
+        side: SideEnum.Top,
+        shiftInPercent: 30
+      }
+    }, {
+      name: "PhotoToComment",
+      startPosition: {
+        name: "Photo",
         side: SideEnum.Bottom,
+        shiftInPercent: 30
+      },
+      endPosition: {
+        name: "Comment",
+        side: SideEnum.Right,
         shiftInPercent: 50
       }
     }, {
-      name: "OrderToProduct",
+      name: "TagToPhoto",
       startPosition: {
-        name: "order",
+        name: "Tag",
         side: SideEnum.Right,
         shiftInPercent: 50
       },
       endPosition: {
-        name: "product",
-        side: SideEnum.Left,
+        name: "Photo",
+        side: SideEnum.Right,
         shiftInPercent: 50
+      }
+    }, {
+      name: "MemberToPhoto",
+      startPosition: {
+        name: "Member",
+        side: SideEnum.Bottom,
+        shiftInPercent: 50
+      },
+      endPosition: {
+        name: "Photo",
+        side: SideEnum.Bottom,
+        shiftInPercent: 70
       }
     }]
   }
 };
-
-const arrData = [
-  data//, data2, data3, data4, data5
-];
-
-arrData.forEach(data => {
-  const container = createDiagramContainer();
-  drawDiagram(container, data.entities, data.diagram.relationsOnDiagram, data.diagram, data.relations);
-});
-
-function createDiagramContainer(): Element {
-  const container = document.createElement('div');
-  container.setAttribute('class', `diagram-container`);
-  document.getElementsByTagName('body')[0].appendChild(container);
-  return container;
-}
-
-function drawDiagram(container: Element, entities: IEntity[], relationOnDiagram: IRelationOnDiagram[], diagram: IDiagram, relations: IRelation[]): void {
-  drawSvg(container);
-  entities.forEach(e => drawEntity(e, container, diagram));
-  relationOnDiagram.forEach(r => drawRelation( r, container, diagram, getRelationType(relations, r.name) ));
-}
-
-function getEntityRect(diagram: IDiagram, name: string): IRect {
-  const e = diagram.entitiesOnDiagram.find(item => item.name === name);
-  return e === null ? null : e.rect;
-}
-
-function drawEntity(entity: IEntity, container: Element, diagram: IDiagram ): void {
-  const rect = getEntityRect(diagram, entity.name);
-  const content = d3.select(container).append('div').attr('class', 'entity');
-  content.style('top', rect.top + 'px')
-    .style('left', rect.left + 'px')
-    .style('width', rect.width + 'px')
-    .style('height', rect.height + 'px');
-  const table = content.append('table');
-  const thead = table.append('caption');
-  thead.text(entity.name);
-  const columns = entity.columns;
-  for (let i = 0; i < columns.length; i++) {
-    let column = table.append('tr');
-    column.append('td').attr('class', 'column-id').text(columns[i].id);
-    column.append('td').attr('class', 'column-field').text(columns[i].field);
-  }
-}
-
-function drawSvg(container: Element): void {
-  d3.select(container).append('svg');
-  createOne2OneStart(container);
-  createOne2OneEnd(container);
-  createOne2ManyEnd(container);
-}
-
-function getRelationType(relations: IRelation[], name: string): RelationTypeEnum {
-  const relationType = relations.find(item => item.name === name);
-  return relationType === null ? null : relationType.type
-}
-
-
-
-function drawRelation(relationOnDiagram: IRelationOnDiagram, container: Element, diagram: IDiagram, relationType: RelationTypeEnum): void {
-  const svg = d3.select(container).select('svg');
-  const startRect = getEntityRect(diagram, relationOnDiagram.startPosition.name);
-  const endRect = getEntityRect(diagram, relationOnDiagram.endPosition.name);
-  const startPoint = calcRelationPoint(relationOnDiagram.startPosition, startRect);
-  const endPoint = calcRelationPoint(relationOnDiagram.endPosition, endRect);
-
-  const startSide = relationOnDiagram.startPosition.side;
-  const endSide = relationOnDiagram.endPosition.side;
-
-  const middlePoint = calcMiddlePoint(startSide, endSide, startPoint, endPoint);
-
-  const path = svg.append('path')
-    .attr('fill', 'none');
-
-
-    path.attr("d", `M ${startPoint.x},${startPoint.y} L ${endPoint.x},${endPoint.y}`);
-
-
-
-  switch (relationType) {
-    case RelationTypeEnum.OneToMany:
-      path.attr("marker-start", "url(#o2oStart)").attr("marker-end", "url(#o2mEnd");
-      break;
-    case RelationTypeEnum.OneToOne:
-      path.attr("marker-start", "url(#o2oStart)").attr("marker-end", "url(#o2oEnd");
-      break;
-  }
-
-
-}
-
-function calcRelationPoint(position: IRelationPosition, rect: IRect): IPoint {
-  const {side, shiftInPercent} = position;
-  let x;
-  let y;
-  switch (side) {
-    case SideEnum.Top:
-      x = rect.left + rect.width * shiftInPercent / 100;
-      y = rect.top;
-      break;
-    case SideEnum.Left:
-      x = rect.left;
-      y = rect.top + rect.height * shiftInPercent / 100;
-      break;
-    case SideEnum.Right:
-      x = rect.left + rect.width;
-      y = rect.top + rect.height * shiftInPercent / 100;
-      break;
-    case SideEnum.Bottom:
-      x = rect.left + rect.width * shiftInPercent / 100;
-      y = rect.top + rect.height;
-      break;
-    default:
-      return null;
-  }
-  return {x: x, y: y}
-}
-
-function calcMiddlePoint(startSide: SideEnum, endSide: SideEnum, start: IPoint, end: IPoint): IPoint {
-  let x;
-  let y;
-  if(startSide === SideEnum.Right && endSide === SideEnum.Top  || startSide === SideEnum.Left && endSide === SideEnum.Top || startSide === SideEnum.Right && endSide === SideEnum.Bottom || startSide === SideEnum.Left && endSide === SideEnum.Bottom) {
-    if(start.y < end.y || start.y < end.y) {
-      x = end.x;
-      y = start.y;
-    } else {
-      x = null;
-      y = null;
-    }
-  }
-  return {
-    x: x,
-    y: y
-  }
-}
-
-function createOne2OneStart(container: Element): void {
-  const marker = d3.select(container).select('svg').append('marker')
-    .attr('id', 'o2oStart')
-    .attr('refX', 0)
-    .attr('refY', 5)
-    .attr('markerWidth', 20)
-    .attr('markerHeight', 20)
-    .attr('orient', 'auto');
-  marker.append('line')
-    .attr("x1", 10)
-    .attr("y1", 0)
-    .attr("x2", 10)
-    .attr("y2", 10);
-}
-function createOne2OneEnd(container: Element): void {
-  const marker = d3.select(container).select('svg').append('marker')
-    .attr('id', 'o2oEnd')
-    .attr('refX', 16)
-    .attr('refY', 5)
-    .attr('markerWidth', 20)
-    .attr('markerHeight', 20)
-    .attr('orient', 'auto');
-  marker.append('line')
-    .attr("x1", 5)
-    .attr("y1", 0)
-    .attr("x2", 5)
-    .attr("y2", 10);
-}
-function createOne2ManyEnd(container: Element): void {
-  const marker = d3.select(container).select('svg').append('marker')
-    .attr('id', 'o2mEnd')
-    .attr('refX', 16)
-    .attr('refY', 5)
-    .attr('markerWidth', 20)
-    .attr('markerHeight', 20)
-    .attr('orient', 'auto');
-  marker.append('line')
-    .attr("x1", 8)
-    .attr("y1", 0)
-    .attr("x2", 8)
-    .attr("y2", 10);
-  marker.append('line')
-    .attr("x1", 16)
-    .attr("y1", 0)
-    .attr("x2", 8)
-    .attr("y2", 5);
-  marker.append('line')
-    .attr("x1", 8)
-    .attr("y1", 5)
-    .attr("x2", 16)
-    .attr("y2", 10);
-  marker.append('line')
-    .attr("x1", 8)
-    .attr("y1", 5)
-    .attr("x2", 16)
-    .attr("y2", 5);
-}
 
