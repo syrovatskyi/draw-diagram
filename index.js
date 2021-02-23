@@ -200,15 +200,15 @@ const data = {
             }, {
                 name: "Lender",
                 rect: {
-                    top: 200,
-                    left: 600,
+                    top: 250,
+                    left: 580,
                     width: 150,
                     height: 150
                 }
             }, {
                 name: "Lender_Borrower",
                 rect: {
-                    top: 180,
+                    top: 230,
                     left: 280,
                     width: 150,
                     height: 150
@@ -1096,11 +1096,19 @@ function drawRelation(relationOnDiagram, container, diagram, relationType) {
     const endPoint = calcRelationPoint(relationOnDiagram.endPosition, endRect);
     const startSide = relationOnDiagram.startPosition.side;
     const endSide = relationOnDiagram.endPosition.side;
-    const middlePoint = calcMiddlePoint(startSide, endSide, startPoint, endPoint);
+
     const path = svg.append('path')
         .attr('fill', 'none');
+    const middlePoint = calcMiddlePoint(startSide, endSide, startPoint, endPoint);
+    const middlePoints = calcMiddlePoints(startSide, endSide, startPoint, endPoint)
+    console.log('middlePoints: ', middlePoints)
 
-    const middlePoints = calcMiddlePoints(startSide, endSide, startPoint, endPoint).filter(item => item.x1 !== null && item.y1 !== null && item.x2 !== null && item.y2 !== null);
+    if (startSide ==="right" && endSide === "top" || startSide ==="right" && endSide === "bottom" || startSide ==="left" && endSide === "top" || startSide ==="left" && endSide === "bottom") {
+        path.attr("d", `M ${startPoint.x},${startPoint.y} L ${middlePoint.x},${middlePoint.y} L ${endPoint.x},${endPoint.y}`);
+    }
+    if (startSide ==="bottom" && endSide === "right" || startSide ==="bottom" && endSide === "left" || startSide ==="top" && endSide === "right" || startSide ==="top" && endSide === "left") {
+        path.attr("d", `M ${startPoint.x},${startPoint.y} L ${middlePoint.x},${middlePoint.y} L ${endPoint.x},${endPoint.y}`);
+    }
 
     path.attr("d", `M ${startPoint.x},${startPoint.y} L ${endPoint.x},${endPoint.y}`);
     switch (relationType) {
@@ -1120,13 +1128,13 @@ function calcMiddlePoints(startSide, endSide, start, end) {
     let y2 = null;
     if (startSide === "left" && endSide === "right") {
         x1 = end.x + (start.x - end.x) / 2;
-        x2 = x1;
+        x2 = end.x + (start.x - end.x) / 2;
         y1 = start.y;
         y2 = end.y;
     }
     if (startSide === "right" && endSide === "left") {
         x1 = start.x + (end.x - start.x) / 2;
-        x2 = x1;
+        x2 = start.x + (end.x - start.x) / 2;
         y1 = start.y;
         y2 = end.y;
     }
@@ -1134,16 +1142,16 @@ function calcMiddlePoints(startSide, endSide, start, end) {
         x1 = start.x;
         x2 = end.x;
         y1 = end.y + (start.y - end.y) / 2;
-        y2 = y1;
+        y2 = end.y + (start.y - end.y) / 2;
     }
     if (startSide === "bottom" && endSide === "top") {
         x1 = start.x;
         x2 = end.x;
         y1 = start.y + (end.y - start.y) / 2;
-        y2 = y1;
+        y2 = start.y + (end.y - start.y) / 2;
     }
 
-    return [{x1: x1, y1: y1}, {x2: x2, y2: y2}]
+    return [x1, y1, x2, y2]
 }
 function calcRelationPoint(position, rect) {
     const { side, shiftInPercent } = position;

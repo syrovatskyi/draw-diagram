@@ -176,7 +176,7 @@ const data: Component = {
     type: RelationTypeEnum.OneToMany,
     from: "Lender",
     to: "Loan"
-  } ],
+  }],
   diagram: {
     entitiesOnDiagram: [{
       name: "Loan_Request",
@@ -213,15 +213,15 @@ const data: Component = {
     }, {
       name: "Lender",
       rect: {
-        top: 200,
-        left: 600,
+        top: 250,
+        left: 580,
         width: 150,
         height: 150
       }
     }, {
       name: "Lender_Borrower",
       rect: {
-        top: 180,
+        top: 230,
         left: 280,
         width: 150,
         height: 150
