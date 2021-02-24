@@ -162,6 +162,11 @@ export const data = {
     type: RelationTypeEnum.OneToMany,
     from: "Lender",
     to: "Loan"
+  }, {
+    name: 'LenderToLoan_Request_Lender',
+    type: RelationTypeEnum.OneToOne,
+    from: "Lender",
+    to: "Loan_Request_Lender"
   }],
   diagram: {
     entitiesOnDiagram: [{
@@ -239,8 +244,8 @@ export const data = {
     }, {
       name: "Deadline",
       rect: {
-        top: 420,
-        left: 500,
+        top: 460,
+        left: 600,
         width: 100,
         height: 100
       }
@@ -376,6 +381,18 @@ export const data = {
         name: "Loan_Request_Lender",
         side: SideEnum.Left,
         shiftInPercent: 50
+      }
+    }, {
+      name: "LenderToLoan_Request_Lender",
+      startPosition: {
+        name: "Lender",
+        side: SideEnum.Bottom,
+        shiftInPercent: 50
+      },
+      endPosition: {
+        name: "Loan_Request_Lender",
+        side: SideEnum.Bottom,
+        shiftInPercent: 70
       }
     }]
   }
@@ -519,7 +536,7 @@ export const data2 = {
     }, {
       name: "Delivery",
       rect: {
-        top: 80,
+        top: 70,
         left: 240,
         width: 150,
         height: 100
@@ -535,7 +552,7 @@ export const data2 = {
     }, {
       name: "Product",
       rect: {
-        top: 250,
+        top: 320,
         left: 0,
         width: 150,
         height: 100
@@ -543,7 +560,7 @@ export const data2 = {
     }, {
       name: "Order_Detail",
       rect: {
-        top: 220,
+        top: 250,
         left: 270,
         width: 150,
         height: 100
@@ -567,7 +584,7 @@ export const data2 = {
     }, {
       name: "Branch",
       rect: {
-        top: 450,
+        top: 430,
         left: 100,
         width: 150,
         height: 80
@@ -577,7 +594,7 @@ export const data2 = {
       name: "SupplierToDelivery",
       startPosition: {
         name: "Supplier",
-        side: SideEnum.Top,
+        side: SideEnum.Right,
         shiftInPercent: 50
       },
       endPosition: {
@@ -589,12 +606,12 @@ export const data2 = {
       name: "DeliveryToOrder_Detail_Delivery",
       startPosition: {
         name: "Delivery",
-        side: SideEnum.Right,
+        side: SideEnum.Top,
         shiftInPercent: 20
       },
       endPosition: {
         name: "Order_Detail_Delivery",
-        side: SideEnum.Top,
+        side: SideEnum.Left,
         shiftInPercent: 50
       }
     }, {
@@ -649,12 +666,12 @@ export const data2 = {
       name: "OrderToHeadquarters",
       startPosition: {
         name: "Order",
-        side: SideEnum.Right,
+        side: SideEnum.Bottom,
         shiftInPercent: 50
       },
       endPosition: {
         name: "Headquarters",
-        side: SideEnum.Bottom,
+        side: SideEnum.Top,
         shiftInPercent: 50
       }
     }, {
@@ -817,7 +834,7 @@ export const data3 = {
     entitiesOnDiagram: [{
       name: "student",
       rect: {
-        top: 120,
+        top: 150,
         left: 180,
         width: 150,
         height: 100
@@ -825,15 +842,15 @@ export const data3 = {
     }, {
       name: "course",
       rect: {
-        top: 120,
-        left: 440,
+        top: 130,
+        left: 640,
         width: 150,
         height: 100
       }
     }, {
       name: "professor",
       rect: {
-        top: 20,
+        top: 0,
         left: 610,
         width: 150,
         height: 100
@@ -857,7 +874,7 @@ export const data3 = {
     }, {
       name: "subject",
       rect: {
-        top: 0,
+        top: 70,
         left: 0,
         width: 150,
         height: 100
@@ -865,8 +882,8 @@ export const data3 = {
     }, {
       name: "faculty",
       rect: {
-        top: 250,
-        left: 540,
+        top: 280,
+        left: 740,
         width: 150,
         height: 100
       }
@@ -895,12 +912,12 @@ export const data3 = {
       name: "ProfessorToCourse",
       startPosition: {
         name: "professor",
-        side: SideEnum.Left,
+        side: SideEnum.Bottom,
         shiftInPercent: 50
       },
       endPosition: {
         name: "course",
-        side: SideEnum.Right,
+        side: SideEnum.Top,
         shiftInPercent: 50
       }
     }, {
@@ -948,7 +965,7 @@ export const data3 = {
       },
       endPosition: {
         name: "progress",
-        side: SideEnum.Top,
+        side: SideEnum.Bottom,
         shiftInPercent: 30
       }
     }, {
@@ -1099,7 +1116,7 @@ export const data4 = {
     }, {
       name: "Location",
       rect: {
-        top: 100,
+        top: 50,
         left: 540,
         width: 150,
         height: 100
@@ -1147,7 +1164,7 @@ export const data4 = {
       endPosition: {
         name: "Photo",
         side: SideEnum.Left,
-        shiftInPercent: 50
+        shiftInPercent: 30
       }
     }, {
       name: "LocationToPhoto",
@@ -1177,24 +1194,24 @@ export const data4 = {
       name: "TagToPhoto",
       startPosition: {
         name: "Tag",
-        side: SideEnum.Right,
+        side: SideEnum.Bottom,
         shiftInPercent: 50
       },
       endPosition: {
         name: "Photo",
-        side: SideEnum.Right,
+        side: SideEnum.Bottom,
         shiftInPercent: 50
       }
     }, {
       name: "MemberToPhoto",
       startPosition: {
         name: "Member",
-        side: SideEnum.Bottom,
+        side: SideEnum.Right,
         shiftInPercent: 50
       },
       endPosition: {
         name: "Photo",
-        side: SideEnum.Bottom,
+        side: SideEnum.Right,
         shiftInPercent: 70
       }
     }]
