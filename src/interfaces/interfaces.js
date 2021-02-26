@@ -1,7 +1,7 @@
 export var RelationTypeEnum;
 (function (RelationTypeEnum) {
-    RelationTypeEnum["OneToOne"] = "one2one";
-    RelationTypeEnum["OneToMany"] = "one2many";
+    RelationTypeEnum["OneToOne"] = "o2o";
+    RelationTypeEnum["OneToMany"] = "o2m";
 })(RelationTypeEnum || (RelationTypeEnum = {}));
 export var SideEnum;
 (function (SideEnum) {

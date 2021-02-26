@@ -1,6 +1,6 @@
 export enum RelationTypeEnum {
-  OneToOne = "one2one",
-  OneToMany = "one2many"
+  OneToOne = "o2o",
+  OneToMany = "o2m"
 }
 
 export enum SideEnum {
@@ -11,8 +11,7 @@ export enum SideEnum {
 }
 
 export interface IColumn {
-  id: number;
-  field: string;
+  name: string;
 }
 
 export interface IEntity {
@@ -52,13 +51,13 @@ export interface IRelationPosition {
 
 export interface IRelationOnDiagram {
   name: string;
-  startPosition: IRelationPosition;
-  endPosition: IRelationPosition;
+  start: IRelationPosition;
+  end: IRelationPosition;
 }
 
 export interface IDiagram {
-  entitiesOnDiagram: IEntityOnDiagram[];
-  relationsOnDiagram: IRelationOnDiagram[];
+  entitiesList: IEntityOnDiagram[];
+  relationsList: IRelationOnDiagram[];
 }
 
 
