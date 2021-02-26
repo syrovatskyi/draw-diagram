@@ -1,7 +1,8 @@
 .diagram-container {
     position: relative;
-    height: 800px;
+    height: 700px;
     overflow: auto;
+    border-bottom: 5px solid black;
 }
 
 
