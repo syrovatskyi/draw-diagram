@@ -1,16 +1,9 @@
-import { RelationTypeEnum, SideEnum } from "./interfaces/interfaces.js";
+import { RelationTypeEnum, SideEnum } from "./interfaces.js";
 // @ts-ignore
 import * as d3 from 'https://unpkg.com/d3?module';
-import {
-    left1, left2,left3, left4, left5, left6, left7, left8,
-    right1, right2, right3, right4, right5, right6, right7, right8,
-    top1, top2, top3, top4, top5, top6, top7, top8,
-    bottom1, bottom2, bottom3, bottom4, bottom5, bottom6, bottom7, bottom8
-} from './api/data.js';
-
-
+import { left1, left2, left3, left4, left5, left6, left7, left8, right1, right2, right3, right4, right5, right6, right7, right8, top1, top2, top3, top4, top5, top6, top7, top8, bottom1, bottom2, bottom3, bottom4, bottom5, bottom6, bottom7, bottom8 } from './data.js';
 const arrData = [
-    left1, left2,left3, left4, left5, left6, left7, left8,
+    left1, left2, left3, left4, left5, left6, left7, left8,
     right1, right2, right3, right4, right5, right6, right7, right8,
     top1, top2, top3, top4, top5, top6, top7, top8,
     bottom1, bottom2, bottom3, bottom4, bottom5, bottom6, bottom7, bottom8
@@ -73,7 +66,6 @@ function drawRelation(relationOnDiagram, container, diagram, relationType) {
     const endSide = relationOnDiagram.end.side;
     const path = svg.append('path')
         .attr('fill', 'none');
-
     // @ts-ignore
     path.attr("d", `M ${startPoint.x},${startPoint.y} L ${endPoint.x},${endPoint.y}`);
     // @ts-ignore
@@ -81,8 +73,6 @@ function drawRelation(relationOnDiagram, container, diagram, relationType) {
         // @ts-ignore
         path.attr("d", `M ${startPoint.x + 15},${startPoint.y} L ${endPoint.x},${endPoint.y}`);
     }
-
-
     if (startSide === 'bottom' && endSide === 'right'
         || startSide === 'bottom' && endSide === 'left'
         || startSide === 'top' && endSide === 'right'
@@ -139,12 +129,13 @@ function calcMiddlePoint(startPoint, endPoint, startSide, endSide) {
             return {
                 x: startPoint.x,
                 y: startPoint.y + 20
-            }
-        } else {
+            };
+        }
+        else {
             return {
                 x: startPoint.x,
                 y: endPoint.y
-            }
+            };
         }
     }
     if (startSide === 'bottom' && endSide === 'left') {
@@ -152,12 +143,13 @@ function calcMiddlePoint(startPoint, endPoint, startSide, endSide) {
             return {
                 x: startPoint.x,
                 y: startPoint.y + 20
-            }
-        } else {
+            };
+        }
+        else {
             return {
                 x: startPoint.x,
                 y: endPoint.y
-            }
+            };
         }
     }
     if (startSide === 'top' && endSide === 'right') {

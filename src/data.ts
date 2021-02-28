@@ -1,5 +1,3 @@
-import {RelationTypeEnum, SideEnum} from "../interfaces/interfaces.js";
-
 export const data = {
   entities: [{
     name: "Loan_Request",
@@ -84,62 +82,62 @@ export const data = {
   }],
   relations: [{
     name: 'BorrowerToLoan_Request',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "Borrower",
     to: "Loan_Request"
   }, {
     name: 'BorrowerToLender_Borrower',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "Borrower",
     to: "Lender_Borrower"
   }, {
     name: 'BorrowerToAddressee',
-    type: RelationTypeEnum.OneToOne,
+    type: "o2o",
     from: "Borrower",
     to: "Addressee"
   }, {
     name: 'AddresseeToLender',
-    type: RelationTypeEnum.OneToOne,
+    type: "o2o",
     from: "Addressee",
     to: "Lender"
   }, {
     name: 'AddresseeToIntermediary',
-    type: RelationTypeEnum.OneToOne,
+    type: "o2o",
     from: "Addressee",
     to: "Intermediary"
   }, {
     name: 'IntermediaryToLoan',
-    type: RelationTypeEnum.OneToOne,
+    type: "o2o",
     from: "Intermediary",
     to: "Loan"
   }, {
     name: 'RepaymentToLoan',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "Repayment",
     to: "Loan"
   }, {
     name: 'DeadlineToLoan',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "Deadline",
     to: "Loan"
   }, {
     name: 'LoanToLender_Borrower',
-    type: RelationTypeEnum.OneToOne,
+    type: "o2o",
     from: "Loan",
     to: "Lender_Borrower"
   }, {
     name: 'Loan_RequestToLoan_Request_Lender',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "Loan",
     to: "Loan_Request_Lender"
   }, {
     name: 'LenderToLender_Borrower',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "Lender",
     to: "Loan"
   }, {
     name: 'LenderToLoan_Request_Lender',
-    type: RelationTypeEnum.OneToOne,
+    type: "o2o",
     from: "Lender",
     to: "Loan_Request_Lender"
   }],
@@ -229,144 +227,144 @@ export const data = {
       name: "BorrowerToLoan_Request",
       start: {
         name: "Borrower",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 50
       },
       end: {
         name: "Loan_Request",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 50
       }
     }, {
       name: "BorrowerToLender_Borrower",
       start: {
         name: "Borrower",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 50
       },
       end: {
         name: "Lender_Borrower",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 30
       }
     }, {
       name: "BorrowerToAddressee",
       start: {
         name: "Borrower",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 50
       },
       end: {
         name: "Addressee",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 50
       }
     }, {
       name: "AddresseeToLender",
       start: {
         name: "Addressee",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 50
       },
       end: {
         name: "Lender",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 50
       }
     }, {
       name: "AddresseeToIntermediary",
       start: {
         name: "Addressee",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 50
       },
       end: {
         name: "Intermediary",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 50
       }
     }, {
       name: "IntermediaryToLoan",
       start: {
         name: "Intermediary",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 50
       },
       end: {
         name: "Loan",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 70
       }
     }, {
       name: "RepaymentToLoan",
       start: {
         name: "Repayment",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 50
       },
       end: {
         name: "Loan",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 50
       }
     }, {
       name: "DeadlineToLoan",
       start: {
         name: "Deadline",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 50
       },
       end: {
         name: "Loan",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 50
       }
     }, {
       name: "LoanToLender_Borrower",
       start: {
         name: "Loan",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 50
       },
       end: {
         name: "Lender_Borrower",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 50
       }
     }, {
       name: "LenderToLender_Borrower",
       start: {
         name: "Lender",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 50
       },
       end: {
         name: "Lender_Borrower",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 70
       }
     }, {
       name: "Loan_RequestToLoan_Request_Lender",
       start: {
         name: "Loan_Request",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 50
       },
       end: {
         name: "Loan_Request_Lender",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 50
       }
     }, {
       name: "LenderToLoan_Request_Lender",
       start: {
         name: "Lender",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 50
       },
       end: {
         name: "Loan_Request_Lender",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 70
       }
     }]
@@ -440,42 +438,42 @@ export const data2 = {
   }],
   relations: [{
     name: "SupplierToDelivery",
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "Supplier",
     to: "Delivery"
   }, {
     name: "DeliveryToOrder_Detail_Delivery",
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "Delivery",
     to: "Order_Detail_Delivery"
   }, {
     name: "Order_DetailToOrder_Detail_Delivery",
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "Order_Detail",
     to: "Order_Detail_Delivery"
   }, {
     name: "SupplierToProduct",
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "Supplier",
     to: "Product"
   }, {
     name: "ProductToOrder_Detail",
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "Product",
     to: "Order_Detail"
   }, {
     name: "OrderToOrder_Detail",
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "Order",
     to: "Order_Detail"
   }, {
     name: "OrderToHeadquarters",
-    type: RelationTypeEnum.OneToOne,
+    type: "o2o",
     from: "Order",
     to: "Headquarters"
   }, {
     name: "HeadquartersToBranch",
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "Headquarters",
     to: "Branch"
   }],
@@ -549,96 +547,96 @@ export const data2 = {
       name: "SupplierToDelivery",
       start: {
         name: "Supplier",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 50
       },
       end: {
         name: "Delivery",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 50
       }
     }, {
       name: "DeliveryToOrder_Detail_Delivery",
       start: {
         name: "Delivery",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 20
       },
       end: {
         name: "Order_Detail_Delivery",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 50
       }
     }, {
       name: "Order_DetailToOrder_Detail_Delivery",
       start: {
         name: "Order_Detail",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 50
       },
       end: {
         name: "Order_Detail_Delivery",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 50
       }
     }, {
       name: "SupplierToProduct",
       start: {
         name: "Supplier",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 50
       },
       end: {
         name: "Product",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 50
       }
     }, {
       name: "ProductToOrder_Detail",
       start: {
         name: "Product",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 50
       },
       end: {
         name: "Order_Detail",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 50
       }
     }, {
       name: "OrderToOrder_Detail",
       start: {
         name: "Order",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 50
       },
       end: {
         name: "Order_Detail",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 50
       }
     }, {
       name: "OrderToHeadquarters",
       start: {
         name: "Order",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 50
       },
       end: {
         name: "Headquarters",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 50
       }
     }, {
       name: "HeadquartersToBranch",
       start: {
         name: "Headquarters",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 50
       },
       end: {
         name: "Branch",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 50
       }
     }]
@@ -718,47 +716,47 @@ export const data3 = {
   }],
   relations: [{
     name: 'CourseToStudent',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "course",
     to: "student"
   }, {
     name: "StudentToProgress",
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "course",
     to: "student"
   }, {
     name: 'ProfessorToCourse',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "student",
     to: "progress"
   }, {
     name: 'CourseToGroup',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "course",
     to: "group"
   }, {
     name: 'GroupToStudent',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "group",
     to: "student"
   }, {
     name: "SubjectToProgress",
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "subject",
     to: "progress"
   }, {
     name: "FacultyToStudent",
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "faculty",
     to: "student"
   }, {
     name: "FacultyToSpeciality",
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "faculty",
     to: "speciality"
   }, {
     name: "SpecialityToStudent",
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "speciality",
     to: "student"
   }],
@@ -832,108 +830,108 @@ export const data3 = {
       name: "CourseToStudent",
       start: {
         name: "course",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 50
       },
       end: {
         name: "student",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 30
       }
     }, {
       name: "ProfessorToCourse",
       start: {
         name: "professor",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 50
       },
       end: {
         name: "course",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 50
       }
     }, {
       name: "CourseToGroup",
       start: {
         name: "course",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 50
       },
       end: {
         name: "group",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 50
       }
     }, {
       name: "GroupToStudent",
       start: {
         name: "group",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 50
       },
       end: {
         name: "student",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 30
       }
     }, {
       name: "StudentToProgress",
       start: {
         name: "student",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 50
       },
       end: {
         name: "progress",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 50
       }
     }, {
       name: "SubjectToProgress",
       start: {
         name: "subject",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 50
       },
       end: {
         name: "progress",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 30
       }
     }, {
       name: "FacultyToStudent",
       start: {
         name: "faculty",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 30
       },
       end: {
         name: "student",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 50
       }
     }, {
       name: "FacultyToSpeciality",
       start: {
         name: "faculty",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 50
       },
       end: {
         name: "speciality",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 50
       }
     }, {
       name: "SpecialityToStudent",
       start: {
         name: "speciality",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 50
       },
       end: {
         name: "student",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 70
       }
     }]
@@ -995,27 +993,27 @@ export const data4 = {
   }],
   relations: [{
     name: "AlbumToPhoto",
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "Album",
     to: "Photo"
   }, {
     name: "LocationToPhoto",
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "Location",
     to: "Photo"
   }, {
     name: "TagToPhoto",
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "Tag",
     to: "Photo"
   }, {
     name: "MemberToPhoto",
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "Member",
     to: "Photo"
   }, {
     name: "PhotoToComment",
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "Photo",
     to: "Comment"
   }],
@@ -1073,60 +1071,60 @@ export const data4 = {
       name: "AlbumToPhoto",
       start: {
         name: "Album",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 50
       },
       end: {
         name: "Photo",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 30
       }
     }, {
       name: "LocationToPhoto",
       start: {
         name: "Location",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 50
       },
       end: {
         name: "Photo",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 30
       }
     }, {
       name: "PhotoToComment",
       start: {
         name: "Photo",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 30
       },
       end: {
         name: "Comment",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 50
       }
     }, {
       name: "TagToPhoto",
       start: {
         name: "Tag",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 50
       },
       end: {
         name: "Photo",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 50
       }
     }, {
       name: "MemberToPhoto",
       start: {
         name: "Member",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 50
       },
       end: {
         name: "Photo",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 70
       }
     }]
@@ -1216,62 +1214,62 @@ export const data5 = {
   }],
   relations: [{
     name: 'BorrowerToLoan_Request',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "Borrower",
     to: "Loan_Request"
   }, {
     name: 'BorrowerToLender_Borrower',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "Borrower",
     to: "Lender_Borrower"
   }, {
     name: 'BorrowerToAddressee',
-    type: RelationTypeEnum.OneToOne,
+    type: "o2o",
     from: "Borrower",
     to: "Addressee"
   }, {
     name: 'AddresseeToLender',
-    type: RelationTypeEnum.OneToOne,
+    type: "o2o",
     from: "Addressee",
     to: "Lender"
   }, {
     name: 'AddresseeToIntermediary',
-    type: RelationTypeEnum.OneToOne,
+    type: "o2o",
     from: "Addressee",
     to: "Intermediary"
   }, {
     name: 'IntermediaryToLoan',
-    type: RelationTypeEnum.OneToOne,
+    type: "o2o",
     from: "Intermediary",
     to: "Loan"
   }, {
     name: 'RepaymentToLoan',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "Repayment",
     to: "Loan"
   }, {
     name: 'DeadlineToLoan',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "Deadline",
     to: "Loan"
   }, {
     name: 'LoanToLender_Borrower',
-    type: RelationTypeEnum.OneToOne,
+    type: "o2o",
     from: "Loan",
     to: "Lender_Borrower"
   }, {
     name: 'Loan_RequestToLoan_Request_Lender',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "Loan",
     to: "Loan_Request_Lender"
   }, {
     name: 'LenderToLender_Borrower',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "Lender",
     to: "Loan"
   }, {
     name: 'LenderToLoan_Request_Lender',
-    type: RelationTypeEnum.OneToOne,
+    type: "o2o",
     from: "Lender",
     to: "Loan_Request_Lender"
   }],
@@ -1361,144 +1359,144 @@ export const data5 = {
       name: "BorrowerToLoan_Request",
       start: {
         name: "Borrower",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 50
       },
       end: {
         name: "Loan_Request",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 70
       }
     }, {
       name: "BorrowerToLender_Borrower",
       start: {
         name: "Borrower",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 50
       },
       end: {
         name: "Lender_Borrower",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 30
       }
     }, {
       name: "BorrowerToAddressee",
       start: {
         name: "Borrower",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 50
       },
       end: {
         name: "Addressee",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 50
       }
     }, {
       name: "AddresseeToLender",
       start: {
         name: "Addressee",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 50
       },
       end: {
         name: "Lender",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 50
       }
     }, {
       name: "AddresseeToIntermediary",
       start: {
         name: "Addressee",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 50
       },
       end: {
         name: "Intermediary",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 30
       }
     }, {
       name: "IntermediaryToLoan",
       start: {
         name: "Intermediary",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 50
       },
       end: {
         name: "Loan",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 70
       }
     }, {
       name: "RepaymentToLoan",
       start: {
         name: "Repayment",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 50
       },
       end: {
         name: "Loan",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 50
       }
     }, {
       name: "DeadlineToLoan",
       start: {
         name: "Deadline",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 50
       },
       end: {
         name: "Loan",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 50
       }
     }, {
       name: "LoanToLender_Borrower",
       start: {
         name: "Loan",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 50
       },
       end: {
         name: "Lender_Borrower",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 50
       }
     }, {
       name: "LenderToLender_Borrower",
       start: {
         name: "Lender",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 50
       },
       end: {
         name: "Lender_Borrower",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 70
       }
     }, {
       name: "Loan_RequestToLoan_Request_Lender",
       start: {
         name: "Loan_Request",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 50
       },
       end: {
         name: "Loan_Request_Lender",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 50
       }
     }, {
       name: "LenderToLoan_Request_Lender",
       start: {
         name: "Lender",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 50
       },
       end: {
         name: "Loan_Request_Lender",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 70
       }
     }]
@@ -1578,47 +1576,47 @@ export const data6 = {
   }],
   relations: [{
     name: 'CourseToStudent',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "course",
     to: "student"
   }, {
     name: "StudentToProgress",
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "course",
     to: "student"
   }, {
     name: 'ProfessorToCourse',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "student",
     to: "progress"
   }, {
     name: 'CourseToGroup',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "course",
     to: "group"
   }, {
     name: 'GroupToStudent',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "group",
     to: "student"
   }, {
     name: "SubjectToProgress",
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "subject",
     to: "progress"
   }, {
     name: "FacultyToStudent",
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "faculty",
     to: "student"
   }, {
     name: "FacultyToSpeciality",
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "faculty",
     to: "speciality"
   }, {
     name: "SpecialityToStudent",
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "speciality",
     to: "student"
   }],
@@ -1692,108 +1690,108 @@ export const data6 = {
       name: "CourseToStudent",
       start: {
         name: "course",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 50
       },
       end: {
         name: "student",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 30
       }
     }, {
       name: "ProfessorToCourse",
       start: {
         name: "professor",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 50
       },
       end: {
         name: "course",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 50
       }
     }, {
       name: "CourseToGroup",
       start: {
         name: "course",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 50
       },
       end: {
         name: "group",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 50
       }
     }, {
       name: "GroupToStudent",
       start: {
         name: "group",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 50
       },
       end: {
         name: "student",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 30
       }
     }, {
       name: "StudentToProgress",
       start: {
         name: "student",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 50
       },
       end: {
         name: "progress",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 50
       }
     }, {
       name: "SubjectToProgress",
       start: {
         name: "subject",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 50
       },
       end: {
         name: "progress",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 30
       }
     }, {
       name: "FacultyToStudent",
       start: {
         name: "faculty",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 30
       },
       end: {
         name: "student",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 50
       }
     }, {
       name: "FacultyToSpeciality",
       start: {
         name: "faculty",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 50
       },
       end: {
         name: "speciality",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 50
       }
     }, {
       name: "SpecialityToStudent",
       start: {
         name: "speciality",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 50
       },
       end: {
         name: "student",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 70
       }
     }]
@@ -1882,22 +1880,22 @@ export const left1 = {
   } ],
   relations: [{
     name: 'AToB',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "A",
     to: "B"
   }, {
     name: 'CToD',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "C",
     to: "D"
   }, {
     name: 'EToF',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "E",
     to: "F"
   }, {
     name: 'GToH',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "G",
     to: "H"
   }],
@@ -1971,48 +1969,48 @@ export const left1 = {
       name: "AToB",
       start: {
         name: "A",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 50
       },
       end: {
         name: "B",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 30
       }
     }, {
       name: "CToD",
       start: {
         name: "C",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 50
       },
       end: {
         name: "D",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 30
       }
     }, {
       name: "EToF",
       start: {
         name: "E",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 50
       },
       end: {
         name: "F",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 30
       }
     }, {
       name: "GToH",
       start: {
         name: "G",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 50
       },
       end: {
         name: "H",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 30
       }
     }]
@@ -2094,22 +2092,22 @@ export const right1 = {
   } ],
   relations: [{
     name: 'AToB',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "A",
     to: "B"
   }, {
     name: 'CToD',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "C",
     to: "D"
   }, {
     name: 'EToF',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "E",
     to: "F"
   }, {
     name: 'GToH',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "G",
     to: "H"
   }],
@@ -2183,48 +2181,48 @@ export const right1 = {
       name: "AToB",
       start: {
         name: "A",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 50
       },
       end: {
         name: "B",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 30
       }
     }, {
       name: "CToD",
       start: {
         name: "C",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 50
       },
       end: {
         name: "D",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 30
       }
     }, {
       name: "EToF",
       start: {
         name: "E",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 50
       },
       end: {
         name: "F",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 30
       }
     }, {
       name: "GToH",
       start: {
         name: "G",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 50
       },
       end: {
         name: "H",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 30
       }
     }]
@@ -2306,22 +2304,22 @@ export const top1 = {
   } ],
   relations: [{
     name: 'AToB',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "A",
     to: "B"
   }, {
     name: 'CToD',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "C",
     to: "D"
   }, {
     name: 'EToF',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "E",
     to: "F"
   }, {
     name: 'GToH',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "G",
     to: "H"
   }],
@@ -2395,48 +2393,48 @@ export const top1 = {
       name: "AToB",
       start: {
         name: "A",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 50
       },
       end: {
         name: "B",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 30
       }
     }, {
       name: "CToD",
       start: {
         name: "C",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 50
       },
       end: {
         name: "D",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 30
       }
     }, {
       name: "EToF",
       start: {
         name: "E",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 50
       },
       end: {
         name: "F",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 30
-    }
+      }
     }, {
       name: "GToH",
       start: {
         name: "G",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 50
       },
       end: {
         name: "H",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 30
       }
     }]
@@ -2518,22 +2516,22 @@ export const bottom1 = {
   } ],
   relations: [{
     name: 'AToB',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "A",
     to: "B"
   }, {
     name: 'CToD',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "C",
     to: "D"
   }, {
     name: 'EToF',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "E",
     to: "F"
   }, {
     name: 'GToH',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "G",
     to: "H"
   }],
@@ -2607,48 +2605,48 @@ export const bottom1 = {
       name: "AToB",
       start: {
         name: "A",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 50
       },
       end: {
         name: "B",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 30
       }
     }, {
       name: "CToD",
       start: {
         name: "C",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 50
       },
       end: {
         name: "D",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 30
       }
     }, {
       name: "EToF",
       start: {
         name: "E",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 50
       },
       end: {
         name: "F",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 30
       }
     }, {
       name: "GToH",
       start: {
         name: "G",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 50
       },
       end: {
         name: "H",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 30
       }
     }]
@@ -2732,22 +2730,22 @@ export const left2 = {
   } ],
   relations: [{
     name: 'AToB',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "A",
     to: "B"
   }, {
     name: 'CToD',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "C",
     to: "D"
   }, {
     name: 'EToF',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "E",
     to: "F"
   }, {
     name: 'GToH',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "G",
     to: "H"
   }],
@@ -2821,48 +2819,48 @@ export const left2 = {
       name: "AToB",
       start: {
         name: "A",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 50
       },
       end: {
         name: "B",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 30
       }
     }, {
       name: "CToD",
       start: {
         name: "C",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 50
       },
       end: {
         name: "D",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 30
       }
     }, {
       name: "EToF",
       start: {
         name: "E",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 50
       },
       end: {
         name: "F",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 30
       }
     }, {
       name: "GToH",
       start: {
         name: "G",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 50
       },
       end: {
         name: "H",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 30
       }
     }]
@@ -2944,22 +2942,22 @@ export const right2 = {
   } ],
   relations: [{
     name: 'AToB',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "A",
     to: "B"
   }, {
     name: 'CToD',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "C",
     to: "D"
   }, {
     name: 'EToF',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "E",
     to: "F"
   }, {
     name: 'GToH',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "G",
     to: "H"
   }],
@@ -3033,48 +3031,48 @@ export const right2 = {
       name: "AToB",
       start: {
         name: "A",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 50
       },
       end: {
         name: "B",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 30
       }
     }, {
       name: "CToD",
       start: {
         name: "C",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 50
       },
       end: {
         name: "D",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 30
       }
     }, {
       name: "EToF",
       start: {
         name: "E",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 50
       },
       end: {
         name: "F",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 30
       }
     }, {
       name: "GToH",
       start: {
         name: "G",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 50
       },
       end: {
         name: "H",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 30
       }
     }]
@@ -3156,22 +3154,22 @@ export const top2 = {
   } ],
   relations: [{
     name: 'AToB',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "A",
     to: "B"
   }, {
     name: 'CToD',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "C",
     to: "D"
   }, {
     name: 'EToF',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "E",
     to: "F"
   }, {
     name: 'GToH',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "G",
     to: "H"
   }],
@@ -3245,48 +3243,48 @@ export const top2 = {
       name: "AToB",
       start: {
         name: "A",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 50
       },
       end: {
         name: "B",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 30
       }
     }, {
       name: "CToD",
       start: {
         name: "C",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 50
       },
       end: {
         name: "D",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 30
       }
     }, {
       name: "EToF",
       start: {
         name: "E",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 50
       },
       end: {
         name: "F",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 30
       }
     }, {
       name: "GToH",
       start: {
         name: "G",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 50
       },
       end: {
         name: "H",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 30
       }
     }]
@@ -3368,22 +3366,22 @@ export const bottom2 = {
   } ],
   relations: [{
     name: 'AToB',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "A",
     to: "B"
   }, {
     name: 'CToD',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "C",
     to: "D"
   }, {
     name: 'EToF',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "E",
     to: "F"
   }, {
     name: 'GToH',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "G",
     to: "H"
   }],
@@ -3457,48 +3455,48 @@ export const bottom2 = {
       name: "AToB",
       start: {
         name: "A",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 50
       },
       end: {
         name: "B",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 30
       }
     }, {
       name: "CToD",
       start: {
         name: "C",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 50
       },
       end: {
         name: "D",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 30
       }
     }, {
       name: "EToF",
       start: {
         name: "E",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 50
       },
       end: {
         name: "F",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 30
       }
     }, {
       name: "GToH",
       start: {
         name: "G",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 50
       },
       end: {
         name: "H",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 30
       }
     }]
@@ -3582,22 +3580,22 @@ export const left3 = {
   } ],
   relations: [{
     name: 'AToB',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "A",
     to: "B"
   }, {
     name: 'CToD',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "C",
     to: "D"
   }, {
     name: 'EToF',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "E",
     to: "F"
   }, {
     name: 'GToH',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "G",
     to: "H"
   }],
@@ -3671,48 +3669,48 @@ export const left3 = {
       name: "AToB",
       start: {
         name: "A",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 50
       },
       end: {
         name: "B",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 30
       }
     }, {
       name: "CToD",
       start: {
         name: "C",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 50
       },
       end: {
         name: "D",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 30
       }
     }, {
       name: "EToF",
       start: {
         name: "E",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 50
       },
       end: {
         name: "F",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 30
       }
     }, {
       name: "GToH",
       start: {
         name: "G",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 50
       },
       end: {
         name: "H",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 30
       }
     }]
@@ -3794,22 +3792,22 @@ export const right3 = {
   } ],
   relations: [{
     name: 'AToB',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "A",
     to: "B"
   }, {
     name: 'CToD',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "C",
     to: "D"
   }, {
     name: 'EToF',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "E",
     to: "F"
   }, {
     name: 'GToH',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "G",
     to: "H"
   }],
@@ -3883,48 +3881,48 @@ export const right3 = {
       name: "AToB",
       start: {
         name: "A",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 50
       },
       end: {
         name: "B",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 30
       }
     }, {
       name: "CToD",
       start: {
         name: "C",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 50
       },
       end: {
         name: "D",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 30
       }
     }, {
       name: "EToF",
       start: {
         name: "E",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 50
       },
       end: {
         name: "F",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 30
       }
     }, {
       name: "GToH",
       start: {
         name: "G",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 50
       },
       end: {
         name: "H",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 30
       }
     }]
@@ -4006,22 +4004,22 @@ export const top3 = {
   } ],
   relations: [{
     name: 'AToB',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "A",
     to: "B"
   }, {
     name: 'CToD',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "C",
     to: "D"
   }, {
     name: 'EToF',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "E",
     to: "F"
   }, {
     name: 'GToH',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "G",
     to: "H"
   }],
@@ -4095,48 +4093,48 @@ export const top3 = {
       name: "AToB",
       start: {
         name: "A",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 50
       },
       end: {
         name: "B",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 30
       }
     }, {
       name: "CToD",
       start: {
         name: "C",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 50
       },
       end: {
         name: "D",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 30
       }
     }, {
       name: "EToF",
       start: {
         name: "E",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 50
       },
       end: {
         name: "F",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 30
       }
     }, {
       name: "GToH",
       start: {
         name: "G",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 50
       },
       end: {
         name: "H",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 30
       }
     }]
@@ -4218,22 +4216,22 @@ export const bottom3 = {
   } ],
   relations: [{
     name: 'AToB',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "A",
     to: "B"
   }, {
     name: 'CToD',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "C",
     to: "D"
   }, {
     name: 'EToF',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "E",
     to: "F"
   }, {
     name: 'GToH',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "G",
     to: "H"
   }],
@@ -4307,48 +4305,48 @@ export const bottom3 = {
       name: "AToB",
       start: {
         name: "A",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 50
       },
       end: {
         name: "B",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 30
       }
     }, {
       name: "CToD",
       start: {
         name: "C",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 50
       },
       end: {
         name: "D",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 30
       }
     }, {
       name: "EToF",
       start: {
         name: "E",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 50
       },
       end: {
         name: "F",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 30
       }
     }, {
       name: "GToH",
       start: {
         name: "G",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 50
       },
       end: {
         name: "H",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 30
       }
     }]
@@ -4432,22 +4430,22 @@ export const left4 = {
   } ],
   relations: [{
     name: 'AToB',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "A",
     to: "B"
   }, {
     name: 'CToD',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "C",
     to: "D"
   }, {
     name: 'EToF',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "E",
     to: "F"
   }, {
     name: 'GToH',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "G",
     to: "H"
   }],
@@ -4521,48 +4519,48 @@ export const left4 = {
       name: "AToB",
       start: {
         name: "A",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 50
       },
       end: {
         name: "B",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 30
       }
     }, {
       name: "CToD",
       start: {
         name: "C",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 50
       },
       end: {
         name: "D",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 30
       }
     }, {
       name: "EToF",
       start: {
         name: "E",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 50
       },
       end: {
         name: "F",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 30
       }
     }, {
       name: "GToH",
       start: {
         name: "G",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 50
       },
       end: {
         name: "H",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 30
       }
     }]
@@ -4644,22 +4642,22 @@ export const right4 = {
   } ],
   relations: [{
     name: 'AToB',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "A",
     to: "B"
   }, {
     name: 'CToD',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "C",
     to: "D"
   }, {
     name: 'EToF',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "E",
     to: "F"
   }, {
     name: 'GToH',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "G",
     to: "H"
   }],
@@ -4733,48 +4731,48 @@ export const right4 = {
       name: "AToB",
       start: {
         name: "A",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 50
       },
       end: {
         name: "B",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 30
       }
     }, {
       name: "CToD",
       start: {
         name: "C",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 50
       },
       end: {
         name: "D",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 30
       }
     }, {
       name: "EToF",
       start: {
         name: "E",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 50
       },
       end: {
         name: "F",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 30
       }
     }, {
       name: "GToH",
       start: {
         name: "G",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 50
       },
       end: {
         name: "H",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 30
       }
     }]
@@ -4856,22 +4854,22 @@ export const top4 = {
   } ],
   relations: [{
     name: 'AToB',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "A",
     to: "B"
   }, {
     name: 'CToD',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "C",
     to: "D"
   }, {
     name: 'EToF',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "E",
     to: "F"
   }, {
     name: 'GToH',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "G",
     to: "H"
   }],
@@ -4945,48 +4943,48 @@ export const top4 = {
       name: "AToB",
       start: {
         name: "A",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 50
       },
       end: {
         name: "B",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 30
       }
     }, {
       name: "CToD",
       start: {
         name: "C",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 50
       },
       end: {
         name: "D",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 30
       }
     }, {
       name: "EToF",
       start: {
         name: "E",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 50
       },
       end: {
         name: "F",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 30
       }
     }, {
       name: "GToH",
       start: {
         name: "G",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 50
       },
       end: {
         name: "H",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 30
       }
     }]
@@ -5066,28 +5064,28 @@ export const bottom4 = {
       name: "English"
     }]
   } ],
-    relations: [{
+  relations: [{
     name: 'AToB',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "A",
     to: "B"
   }, {
     name: 'CToD',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "C",
     to: "D"
   }, {
     name: 'EToF',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "E",
     to: "F"
   }, {
     name: 'GToH',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "G",
     to: "H"
   }],
-    diagram: {
+  diagram: {
     entitiesList: [{
       name: "A",
       rect: {
@@ -5153,52 +5151,52 @@ export const bottom4 = {
         height: 100
       }
     } ],
-      relationsList: [{
+    relationsList: [{
       name: "AToB",
       start: {
         name: "A",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 50
       },
       end: {
         name: "B",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 30
       }
     }, {
       name: "CToD",
       start: {
         name: "C",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 50
       },
       end: {
         name: "D",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 30
       }
     }, {
       name: "EToF",
       start: {
         name: "E",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 50
       },
       end: {
         name: "F",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 30
       }
     }, {
       name: "GToH",
       start: {
         name: "G",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 50
       },
       end: {
         name: "H",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 30
       }
     }]
@@ -5282,22 +5280,22 @@ export const left5 = {
   } ],
   relations: [{
     name: 'AToB',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "A",
     to: "B"
   }, {
     name: 'CToD',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "C",
     to: "D"
   }, {
     name: 'EToF',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "E",
     to: "F"
   }, {
     name: 'GToH',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "G",
     to: "H"
   }],
@@ -5371,48 +5369,48 @@ export const left5 = {
       name: "AToB",
       start: {
         name: "A",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 50
       },
       end: {
         name: "B",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 30
       }
     }, {
       name: "CToD",
       start: {
         name: "C",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 50
       },
       end: {
         name: "D",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 30
       }
     }, {
       name: "EToF",
       start: {
         name: "E",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 50
       },
       end: {
         name: "F",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 30
       }
     }, {
       name: "GToH",
       start: {
         name: "G",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 50
       },
       end: {
         name: "H",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 30
       }
     }]
@@ -5494,22 +5492,22 @@ export const right5 = {
   } ],
   relations: [{
     name: 'AToB',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "A",
     to: "B"
   }, {
     name: 'CToD',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "C",
     to: "D"
   }, {
     name: 'EToF',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "E",
     to: "F"
   }, {
     name: 'GToH',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "G",
     to: "H"
   }],
@@ -5583,48 +5581,48 @@ export const right5 = {
       name: "AToB",
       start: {
         name: "A",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 50
       },
       end: {
         name: "B",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 30
       }
     }, {
       name: "CToD",
       start: {
         name: "C",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 50
       },
       end: {
         name: "D",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 30
       }
     }, {
       name: "EToF",
       start: {
         name: "E",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 50
       },
       end: {
         name: "F",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 30
       }
     }, {
       name: "GToH",
       start: {
         name: "G",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 50
       },
       end: {
         name: "H",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 30
       }
     }]
@@ -5706,22 +5704,22 @@ export const top5 = {
   } ],
   relations: [{
     name: 'AToB',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "A",
     to: "B"
   }, {
     name: 'CToD',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "C",
     to: "D"
   }, {
     name: 'EToF',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "E",
     to: "F"
   }, {
     name: 'GToH',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "G",
     to: "H"
   }],
@@ -5795,48 +5793,48 @@ export const top5 = {
       name: "AToB",
       start: {
         name: "A",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 50
       },
       end: {
         name: "B",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 30
       }
     }, {
       name: "CToD",
       start: {
         name: "C",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 50
       },
       end: {
         name: "D",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 30
       }
     }, {
       name: "EToF",
       start: {
         name: "E",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 50
       },
       end: {
         name: "F",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 30
       }
     }, {
       name: "GToH",
       start: {
         name: "G",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 50
       },
       end: {
         name: "H",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 30
       }
     }]
@@ -5918,22 +5916,22 @@ export const bottom5 = {
   } ],
   relations: [{
     name: 'AToB',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "A",
     to: "B"
   }, {
     name: 'CToD',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "C",
     to: "D"
   }, {
     name: 'EToF',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "E",
     to: "F"
   }, {
     name: 'GToH',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "G",
     to: "H"
   }],
@@ -6007,48 +6005,48 @@ export const bottom5 = {
       name: "AToB",
       start: {
         name: "A",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 50
       },
       end: {
         name: "B",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 30
       }
     }, {
       name: "CToD",
       start: {
         name: "C",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 50
       },
       end: {
         name: "D",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 30
       }
     }, {
       name: "EToF",
       start: {
         name: "E",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 50
       },
       end: {
         name: "F",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 30
       }
     }, {
       name: "GToH",
       start: {
         name: "G",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 50
       },
       end: {
         name: "H",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 30
       }
     }]
@@ -6133,22 +6131,22 @@ export const left6 = {
   } ],
   relations: [{
     name: 'AToB',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "A",
     to: "B"
   }, {
     name: 'CToD',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "C",
     to: "D"
   }, {
     name: 'EToF',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "E",
     to: "F"
   }, {
     name: 'GToH',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "G",
     to: "H"
   }],
@@ -6222,48 +6220,48 @@ export const left6 = {
       name: "AToB",
       start: {
         name: "A",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 50
       },
       end: {
         name: "B",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 30
       }
     }, {
       name: "CToD",
       start: {
         name: "C",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 50
       },
       end: {
         name: "D",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 30
       }
     }, {
       name: "EToF",
       start: {
         name: "E",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 50
       },
       end: {
         name: "F",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 30
       }
     }, {
       name: "GToH",
       start: {
         name: "G",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 50
       },
       end: {
         name: "H",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 30
       }
     }]
@@ -6345,22 +6343,22 @@ export const right6 = {
   } ],
   relations: [{
     name: 'AToB',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "A",
     to: "B"
   }, {
     name: 'CToD',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "C",
     to: "D"
   }, {
     name: 'EToF',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "E",
     to: "F"
   }, {
     name: 'GToH',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "G",
     to: "H"
   }],
@@ -6434,48 +6432,48 @@ export const right6 = {
       name: "AToB",
       start: {
         name: "A",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 50
       },
       end: {
         name: "B",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 30
       }
     }, {
       name: "CToD",
       start: {
         name: "C",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 50
       },
       end: {
         name: "D",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 30
       }
     }, {
       name: "EToF",
       start: {
         name: "E",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 50
       },
       end: {
         name: "F",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 30
       }
     }, {
       name: "GToH",
       start: {
         name: "G",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 50
       },
       end: {
         name: "H",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 30
       }
     }]
@@ -6557,22 +6555,22 @@ export const top6 = {
   } ],
   relations: [{
     name: 'AToB',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "A",
     to: "B"
   }, {
     name: 'CToD',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "C",
     to: "D"
   }, {
     name: 'EToF',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "E",
     to: "F"
   }, {
     name: 'GToH',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "G",
     to: "H"
   }],
@@ -6646,48 +6644,48 @@ export const top6 = {
       name: "AToB",
       start: {
         name: "A",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 50
       },
       end: {
         name: "B",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 30
       }
     }, {
       name: "CToD",
       start: {
         name: "C",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 50
       },
       end: {
         name: "D",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 30
       }
     }, {
       name: "EToF",
       start: {
         name: "E",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 50
       },
       end: {
         name: "F",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 30
       }
     }, {
       name: "GToH",
       start: {
         name: "G",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 50
       },
       end: {
         name: "H",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 30
       }
     }]
@@ -6769,22 +6767,22 @@ export const bottom6 = {
   } ],
   relations: [{
     name: 'AToB',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "A",
     to: "B"
   }, {
     name: 'CToD',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "C",
     to: "D"
   }, {
     name: 'EToF',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "E",
     to: "F"
   }, {
     name: 'GToH',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "G",
     to: "H"
   }],
@@ -6858,48 +6856,48 @@ export const bottom6 = {
       name: "AToB",
       start: {
         name: "A",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 50
       },
       end: {
         name: "B",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 30
       }
     }, {
       name: "CToD",
       start: {
         name: "C",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 50
       },
       end: {
         name: "D",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 30
       }
     }, {
       name: "EToF",
       start: {
         name: "E",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 50
       },
       end: {
         name: "F",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 30
       }
     }, {
       name: "GToH",
       start: {
         name: "G",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 50
       },
       end: {
         name: "H",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 30
       }
     }]
@@ -6983,22 +6981,22 @@ export const left7 = {
   } ],
   relations: [{
     name: 'AToB',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "A",
     to: "B"
   }, {
     name: 'CToD',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "C",
     to: "D"
   }, {
     name: 'EToF',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "E",
     to: "F"
   }, {
     name: 'GToH',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "G",
     to: "H"
   }],
@@ -7072,48 +7070,48 @@ export const left7 = {
       name: "AToB",
       start: {
         name: "A",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 50
       },
       end: {
         name: "B",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 30
       }
     }, {
       name: "CToD",
       start: {
         name: "C",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 50
       },
       end: {
         name: "D",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 30
       }
     }, {
       name: "EToF",
       start: {
         name: "E",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 50
       },
       end: {
         name: "F",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 30
       }
     }, {
       name: "GToH",
       start: {
         name: "G",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 50
       },
       end: {
         name: "H",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 30
       }
     }]
@@ -7195,22 +7193,22 @@ export const right7 = {
   } ],
   relations: [{
     name: 'AToB',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "A",
     to: "B"
   }, {
     name: 'CToD',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "C",
     to: "D"
   }, {
     name: 'EToF',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "E",
     to: "F"
   }, {
     name: 'GToH',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "G",
     to: "H"
   }],
@@ -7284,48 +7282,48 @@ export const right7 = {
       name: "AToB",
       start: {
         name: "A",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 50
       },
       end: {
         name: "B",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 30
       }
     }, {
       name: "CToD",
       start: {
         name: "C",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 50
       },
       end: {
         name: "D",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 30
       }
     }, {
       name: "EToF",
       start: {
         name: "E",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 50
       },
       end: {
         name: "F",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 30
       }
     }, {
       name: "GToH",
       start: {
         name: "G",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 50
       },
       end: {
         name: "H",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 30
       }
     }]
@@ -7407,22 +7405,22 @@ export const top7 = {
   } ],
   relations: [{
     name: 'AToB',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "A",
     to: "B"
   }, {
     name: 'CToD',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "C",
     to: "D"
   }, {
     name: 'EToF',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "E",
     to: "F"
   }, {
     name: 'GToH',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "G",
     to: "H"
   }],
@@ -7496,48 +7494,48 @@ export const top7 = {
       name: "AToB",
       start: {
         name: "A",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 50
       },
       end: {
         name: "B",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 30
       }
     }, {
       name: "CToD",
       start: {
         name: "C",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 50
       },
       end: {
         name: "D",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 30
       }
     }, {
       name: "EToF",
       start: {
         name: "E",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 50
       },
       end: {
         name: "F",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 30
       }
     }, {
       name: "GToH",
       start: {
         name: "G",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 50
       },
       end: {
         name: "H",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 30
       }
     }]
@@ -7619,22 +7617,22 @@ export const bottom7 = {
   } ],
   relations: [{
     name: 'AToB',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "A",
     to: "B"
   }, {
     name: 'CToD',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "C",
     to: "D"
   }, {
     name: 'EToF',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "E",
     to: "F"
   }, {
     name: 'GToH',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "G",
     to: "H"
   }],
@@ -7708,48 +7706,48 @@ export const bottom7 = {
       name: "AToB",
       start: {
         name: "A",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 50
       },
       end: {
         name: "B",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 30
       }
     }, {
       name: "CToD",
       start: {
         name: "C",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 50
       },
       end: {
         name: "D",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 30
       }
     }, {
       name: "EToF",
       start: {
         name: "E",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 50
       },
       end: {
         name: "F",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 30
       }
     }, {
       name: "GToH",
       start: {
         name: "G",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 50
       },
       end: {
         name: "H",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 30
       }
     }]
@@ -7833,22 +7831,22 @@ export const left8 = {
   } ],
   relations: [{
     name: 'AToB',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "A",
     to: "B"
   }, {
     name: 'CToD',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "C",
     to: "D"
   }, {
     name: 'EToF',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "E",
     to: "F"
   }, {
     name: 'GToH',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "G",
     to: "H"
   }],
@@ -7922,48 +7920,48 @@ export const left8 = {
       name: "AToB",
       start: {
         name: "A",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 50
       },
       end: {
         name: "B",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 30
       }
     }, {
       name: "CToD",
       start: {
         name: "C",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 50
       },
       end: {
         name: "D",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 30
       }
     }, {
       name: "EToF",
       start: {
         name: "E",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 50
       },
       end: {
         name: "F",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 30
       }
     }, {
       name: "GToH",
       start: {
         name: "G",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 50
       },
       end: {
         name: "H",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 30
       }
     }]
@@ -8045,22 +8043,22 @@ export const right8 = {
   } ],
   relations: [{
     name: 'AToB',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "A",
     to: "B"
   }, {
     name: 'CToD',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "C",
     to: "D"
   }, {
     name: 'EToF',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "E",
     to: "F"
   }, {
     name: 'GToH',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "G",
     to: "H"
   }],
@@ -8134,48 +8132,48 @@ export const right8 = {
       name: "AToB",
       start: {
         name: "A",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 50
       },
       end: {
         name: "B",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 30
       }
     }, {
       name: "CToD",
       start: {
         name: "C",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 50
       },
       end: {
         name: "D",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 30
       }
     }, {
       name: "EToF",
       start: {
         name: "E",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 50
       },
       end: {
         name: "F",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 30
       }
     }, {
       name: "GToH",
       start: {
         name: "G",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 50
       },
       end: {
         name: "H",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 30
       }
     }]
@@ -8257,22 +8255,22 @@ export const top8 = {
   } ],
   relations: [{
     name: 'AToB',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "A",
     to: "B"
   }, {
     name: 'CToD',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "C",
     to: "D"
   }, {
     name: 'EToF',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "E",
     to: "F"
   }, {
     name: 'GToH',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "G",
     to: "H"
   }],
@@ -8346,48 +8344,48 @@ export const top8 = {
       name: "AToB",
       start: {
         name: "A",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 50
       },
       end: {
         name: "B",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 30
       }
     }, {
       name: "CToD",
       start: {
         name: "C",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 50
       },
       end: {
         name: "D",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 30
       }
     }, {
       name: "EToF",
       start: {
         name: "E",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 50
       },
       end: {
         name: "F",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 30
       }
     }, {
       name: "GToH",
       start: {
         name: "G",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 50
       },
       end: {
         name: "H",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 30
       }
     }]
@@ -8469,22 +8467,22 @@ export const bottom8 = {
   } ],
   relations: [{
     name: 'AToB',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "A",
     to: "B"
   }, {
     name: 'CToD',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "C",
     to: "D"
   }, {
     name: 'EToF',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "E",
     to: "F"
   }, {
     name: 'GToH',
-    type: RelationTypeEnum.OneToMany,
+    type: "o2m",
     from: "G",
     to: "H"
   }],
@@ -8558,48 +8556,48 @@ export const bottom8 = {
       name: "AToB",
       start: {
         name: "A",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 50
       },
       end: {
         name: "B",
-        side: SideEnum.Left,
+        side: "left",
         shiftInPercent: 30
       }
     }, {
       name: "CToD",
       start: {
         name: "C",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 50
       },
       end: {
         name: "D",
-        side: SideEnum.Right,
+        side: "right",
         shiftInPercent: 30
       }
     }, {
       name: "EToF",
       start: {
         name: "E",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 50
       },
       end: {
         name: "F",
-        side: SideEnum.Top,
+        side: "top",
         shiftInPercent: 30
       }
     }, {
       name: "GToH",
       start: {
         name: "G",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 50
       },
       end: {
         name: "H",
-        side: SideEnum.Bottom,
+        side: "bottom",
         shiftInPercent: 30
       }
     }]

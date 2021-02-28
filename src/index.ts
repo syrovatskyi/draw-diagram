@@ -4,19 +4,25 @@ import {
   IPoint,
   IRect,
   IRelation,
-  IRelationOnDiagram,
-  IRelationPosition,
+  IRelationOnDiagram, IRelationPosition,
   RelationTypeEnum,
   SideEnum
-} from "./interfaces/interfaces.js";
+} from "./interfaces";
 // @ts-ignore
 import * as d3 from 'https://unpkg.com/d3?module';
+import {
+  left1, left2,left3, left4, left5, left6, left7, left8,
+  right1, right2, right3, right4, right5, right6, right7, right8,
+  top1, top2, top3, top4, top5, top6, top7, top8,
+  bottom1, bottom2, bottom3, bottom4, bottom5, bottom6, bottom7, bottom8
+} from './data';
 
-
-import {data, data2, data3, data4, data5, data6} from './api/data.js'
 
 const arrData = [
-  data, data2, data3, data4, data5, data6
+  left1, left2,left3, left4, left5, left6, left7, left8,
+  right1, right2, right3, right4, right5, right6, right7, right8,
+  top1, top2, top3, top4, top5, top6, top7, top8,
+  bottom1, bottom2, bottom3, bottom4, bottom5, bottom6, bottom7, bottom8
 ];
 
 createDiagram(arrData);
@@ -91,17 +97,17 @@ function drawRelation(relationOnDiagram: IRelationOnDiagram, container: Element,
 
   const path = svg.append('path')
     .attr('fill', 'none');
-
+  
+  // @ts-ignore
+  path.attr("d", `M ${startPoint.x},${startPoint.y} L ${endPoint.x},${endPoint.y}`);
   // @ts-ignore
   if (startPoint.y === endPoint.y) {
     // @ts-ignore
-    path.attr("d", `M ${startPoint.x},${startPoint.y} L ${endPoint.x},${endPoint.y}`);
+    path.attr("d", `M ${startPoint.x + 15},${startPoint.y} L ${endPoint.x},${endPoint.y}`);
   }
-
-
-
-  if (
-    startSide === 'bottom' && endSide === 'right'
+  
+  
+  if (startSide === 'bottom' && endSide === 'right'
     || startSide === 'bottom' && endSide === 'left'
     || startSide === 'top' && endSide === 'right'
     || startSide === 'top' && endSide === 'left'
@@ -111,17 +117,17 @@ function drawRelation(relationOnDiagram: IRelationOnDiagram, container: Element,
     || startSide === 'left' && endSide === 'bottom') {
     const middleP = calcMiddlePoint(startPoint, endPoint, startSide, endSide);
     path.attr("d", `M ${startPoint.x},${startPoint.y} L ${middleP.x},${middleP.y} L ${endPoint.x},${endPoint.y}`);
-  } else {
+  }
+  else {
     const middleP = calcTwoMiddlePoints(startPoint, endPoint, startSide, endSide);
     path.attr("d", `M ${startPoint.x},${startPoint.y} L ${middleP.x1},${middleP.y1} L ${middleP.x2},${middleP.y2}L ${endPoint.x},${endPoint.y}`);
   }
-
   switch (relationType) {
     case RelationTypeEnum.OneToMany:
-      path.attr("marker-start", "url(#o2oStart)").attr("marker-end", "url(#o2mEnd");
+      path.attr("marker-start", "url(#o2oStart)").attr("marker-end", "url(#o2mEnd)");
       break;
     case RelationTypeEnum.OneToOne:
-      path.attr("marker-start", "url(#o2oStart)").attr("marker-end", "url(#o2oEnd");
+      path.attr("marker-start", "url(#o2oStart)").attr("marker-end", "url(#o2oEnd)");
       break;
   }
 
