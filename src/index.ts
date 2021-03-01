@@ -18,6 +18,8 @@ import {
   bottom1, bottom2, bottom3, bottom4, bottom5, bottom6, bottom7, bottom8
 } from './data';
 
+
+
 const arrData = [
   left1, left2,left3, left4, left5, left6, left7, left8,
   right1, right2, right3, right4, right5, right6, right7, right8,
@@ -32,6 +34,7 @@ function createDiagram(data: any[]) {
     const container = createDiagramContainer();
     drawDiagram(container, data.entities, data.diagram.relationsList, data.diagram, data.relations);
   });
+  console.log('hello');
 }
 
 function createDiagramContainer(): Element {
