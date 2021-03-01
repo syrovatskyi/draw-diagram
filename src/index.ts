@@ -8,15 +8,15 @@ import {
   RelationTypeEnum,
   SideEnum
 } from "./interfaces";
+import * as _ from 'lodash';
 // @ts-ignore
-import * as d3 from 'https://unpkg.com/d3?module';
+import * as d3 from "d3";
 import {
   left1, left2,left3, left4, left5, left6, left7, left8,
   right1, right2, right3, right4, right5, right6, right7, right8,
   top1, top2, top3, top4, top5, top6, top7, top8,
   bottom1, bottom2, bottom3, bottom4, bottom5, bottom6, bottom7, bottom8
 } from './data';
-
 
 const arrData = [
   left1, left2,left3, left4, left5, left6, left7, left8,
@@ -31,7 +31,7 @@ function createDiagram(data: any[]) {
   data.forEach(data => {
     const container = createDiagramContainer();
     drawDiagram(container, data.entities, data.diagram.relationsList, data.diagram, data.relations);
-  })
+  });
 }
 
 function createDiagramContainer(): Element {
@@ -48,6 +48,7 @@ function drawDiagram(container: Element, entities: IEntity[], relationsList: IRe
 }
 
 function getEntityRect(diagram: IDiagram, name: string): IRect {
+  // @ts-ignore
   const e = diagram.entitiesList.find(item => item.name === name);
   return e === null ? null : e.rect;
 }
@@ -71,12 +72,13 @@ function drawEntity(entity: IEntity, container: Element, diagram: IDiagram ): vo
 
 function drawSvg(container: Element): void {
   d3.select(container).append('svg');
-  createOne2OneStart(container);
-  createOne2OneEnd(container);
-  createOne2ManyEnd(container);
+  // createOne2OneStart(container);
+  // createOne2OneEnd(container);
+  // createOne2ManyEnd(container);
 }
 
 function getRelationType(relations: IRelation[], name: string): RelationTypeEnum {
+  // @ts-ignore
   const relationType = relations.find(item => item.name === name);
   return relationType === null ? null : relationType.type
 }
@@ -97,31 +99,35 @@ function drawRelation(relationOnDiagram: IRelationOnDiagram, container: Element,
 
   const path = svg.append('path')
     .attr('fill', 'none');
-  
+
   // @ts-ignore
   path.attr("d", `M ${startPoint.x},${startPoint.y} L ${endPoint.x},${endPoint.y}`);
-  // @ts-ignore
-  if (startPoint.y === endPoint.y) {
-    // @ts-ignore
-    path.attr("d", `M ${startPoint.x + 15},${startPoint.y} L ${endPoint.x},${endPoint.y}`);
-  }
-  
-  
-  if (startSide === 'bottom' && endSide === 'right'
-    || startSide === 'bottom' && endSide === 'left'
-    || startSide === 'top' && endSide === 'right'
-    || startSide === 'top' && endSide === 'left'
-    || startSide === 'right' && endSide === 'top'
-    || startSide === 'left' && endSide === 'top'
-    || startSide === 'right' && endSide === 'bottom'
-    || startSide === 'left' && endSide === 'bottom') {
-    const middleP = calcMiddlePoint(startPoint, endPoint, startSide, endSide);
-    path.attr("d", `M ${startPoint.x},${startPoint.y} L ${middleP.x},${middleP.y} L ${endPoint.x},${endPoint.y}`);
-  }
-  else {
-    const middleP = calcTwoMiddlePoints(startPoint, endPoint, startSide, endSide);
-    path.attr("d", `M ${startPoint.x},${startPoint.y} L ${middleP.x1},${middleP.y1} L ${middleP.x2},${middleP.y2}L ${endPoint.x},${endPoint.y}`);
-  }
+  // // @ts-ignore
+  // if (startPoint.y === endPoint.y) {
+  //   // @ts-ignore
+  //   path.attr("d", `M ${startPoint.x + 15},${startPoint.y} L ${endPoint.x},${endPoint.y}`);
+  // }
+  //
+  //
+  // if (startSide === 'bottom' && endSide === 'right'
+  //   || startSide === 'bottom' && endSide === 'left'
+  //   || startSide === 'top' && endSide === 'right'
+  //   || startSide === 'top' && endSide === 'left'
+  //   || startSide === 'right' && endSide === 'top'
+  //   || startSide === 'left' && endSide === 'top'
+  //   || startSide === 'right' && endSide === 'bottom'
+  //   || startSide === 'left' && endSide === 'bottom') {
+  //   // @ts-ignore
+  //   const middleP = calcMiddlePoint(startPoint, endPoint, startSide, endSide);
+  //   // @ts-ignore
+  //   path.attr("d", `M ${startPoint.x},${startPoint.y} L ${middleP.x},${middleP.y} L ${endPoint.x},${endPoint.y}`);
+  // }
+  // else {
+  //   // @ts-ignore
+  //   const middleP = calcTwoMiddlePoints(startPoint, endPoint, startSide, endSide);
+  //   // @ts-ignore
+  //   path.attr("d", `M ${startPoint.x},${startPoint.y} L ${middleP.x1},${middleP.y1} L ${middleP.x2},${middleP.y2}L ${endPoint.x},${endPoint.y}`);
+  // }
   switch (relationType) {
     case RelationTypeEnum.OneToMany:
       path.attr("marker-start", "url(#o2oStart)").attr("marker-end", "url(#o2mEnd)");
@@ -134,26 +140,26 @@ function drawRelation(relationOnDiagram: IRelationOnDiagram, container: Element,
 
 }
 
-function calcRelationPoint(position: IRelationPosition, rect: IRect): IPoint {
+function calcRelationPoint(position: IRelationPosition, rect: IRect): null | IPoint {
   const {side, shiftInPercent} = position;
   let x;
   let y;
   switch (side) {
     case SideEnum.Top:
       x = rect.left + rect.width * shiftInPercent / 100;
-      y = rect.top;
+      y = rect.top - 15;
       break;
     case SideEnum.Left:
-      x = rect.left;
+      x = rect.left - 15;
       y = rect.top + rect.height * shiftInPercent / 100;
       break;
     case SideEnum.Right:
-      x = rect.left + rect.width;
+      x = rect.left + rect.width + 15;
       y = rect.top + rect.height * shiftInPercent / 100;
       break;
     case SideEnum.Bottom:
       x = rect.left + rect.width * shiftInPercent / 100;
-      y = rect.top + rect.height;
+      y = rect.top + rect.height + 15;
       break;
     default:
       return null;
@@ -161,7 +167,7 @@ function calcRelationPoint(position: IRelationPosition, rect: IRect): IPoint {
   return {x: x, y: y}
 }
 
-function calcMiddlePoint(startPoint, endPoint, startSide, endSide) {
+function calcMiddlePoint(startPoint: IPoint, endPoint: IPoint, startSide: SideEnum, endSide: SideEnum) {
   if (startSide === 'bottom' && endSide === 'right') {
     if (startPoint.y > endPoint.y) {
       return {
@@ -274,7 +280,7 @@ function calcMiddlePoint(startPoint, endPoint, startSide, endSide) {
   }
 }
 
-function calcTwoMiddlePoints(startPoint, endPoint, startSide, endSide) {
+function calcTwoMiddlePoints(startPoint: IPoint, endPoint: IPoint, startSide: SideEnum, endSide: SideEnum) {
 
   if (startSide === 'right' && endSide === 'left') {
     return {
