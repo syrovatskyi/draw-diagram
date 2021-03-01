@@ -93,8 +93,8 @@ function drawRelation(relationOnDiagram: IRelationOnDiagram, container: Element,
   const endRect = getEntityRect(diagram, relationOnDiagram.end.name);
   const startConnector = calcRelationPoint(relationOnDiagram.start, startRect);
   const endConnector = calcRelationPoint(relationOnDiagram.end, endRect);
-  const startPoint = calcRelationPointByPosition(relationOnDiagram.start, startRect);
-  const endPoint = calcRelationPointByPosition(relationOnDiagram.end, endRect);
+  const startPoint = calcConnectorPoint(relationOnDiagram.start, startRect);
+  const endPoint = calcConnectorPoint(relationOnDiagram.end, endRect);
 
   const startSide = relationOnDiagram.start.side;
   const endSide = relationOnDiagram.end.side;
@@ -104,12 +104,30 @@ function drawRelation(relationOnDiagram: IRelationOnDiagram, container: Element,
   const path = svg.append('path')
     .attr('fill', 'none');
 
-  // @ts-ignore
+
   path.attr("d",
     `M ${startPoint.x},${startPoint.y}
            L ${startConnector.x}, ${startConnector.y}
            L ${endConnector.x}, ${endConnector.y}
            L ${endPoint.x},${endPoint.y}`);
+
+  if (startSide === 'bottom' && endSide === 'right'
+      || startSide === 'bottom' && endSide === 'left'
+      || startSide === 'top' && endSide === 'right'
+      || startSide === 'top' && endSide === 'left'
+      || startSide === 'right' && endSide === 'top'
+      || startSide === 'left' && endSide === 'top'
+      || startSide === 'right' && endSide === 'bottom'
+      || startSide === 'left' && endSide === 'bottom') {
+      // @ts-ignore
+      const middleP = calcMiddlePoint(startPoint, endPoint, startSide, endSide);
+      path.attr("d",
+        `M ${startPoint.x},${startPoint.y}
+               L ${startConnector.x}, ${startConnector.y} 
+               L ${middleP.x},${middleP.y} 
+               L ${endConnector.x}, ${endConnector.y}
+               L ${endPoint.x},${endPoint.y}`);
+    }
 
   switch (relationType) {
     case RelationTypeEnum.OneToMany:
@@ -130,19 +148,19 @@ function calcRelationPoint(position: IRelationPosition, rect: IRect): null | IPo
   switch (side) {
     case SideEnum.Top:
       x = rect.left + rect.width * shiftInPercent / 100;
-      y = rect.top - 15;
+      y = rect.top - 10;
       break;
     case SideEnum.Left:
-      x = rect.left - 15;
+      x = rect.left - 10;
       y = rect.top + rect.height * shiftInPercent / 100;
       break;
     case SideEnum.Right:
-      x = rect.left + rect.width + 15;
+      x = rect.left + rect.width + 10;
       y = rect.top + rect.height * shiftInPercent / 100;
       break;
     case SideEnum.Bottom:
       x = rect.left + rect.width * shiftInPercent / 100;
-      y = rect.top + rect.height + 15;
+      y = rect.top + rect.height + 10;
       break;
     default:
       return null;
@@ -151,7 +169,7 @@ function calcRelationPoint(position: IRelationPosition, rect: IRect): null | IPo
 }
 
 
-function calcRelationPointByPosition(position: IRelationPosition, rect: IRect): null | IPoint {
+function calcConnectorPoint(position: IRelationPosition, rect: IRect): null | IPoint {
   const {side, shiftInPercent} = position;
   let x;
   let y;
