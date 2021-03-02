@@ -28,7 +28,6 @@ const arrData = [
 ];
 
 createDiagram(arrData);
-
 function createDiagram(data: any[]) {
   data.forEach(data => {
     const container = createDiagramContainer();
@@ -43,6 +42,7 @@ function createDiagramContainer(): Element {
   return container;
 }
 
+
 function drawDiagram(container: Element, entities: IEntity[], relationsList: IRelationOnDiagram[], diagram: IDiagram, relations: IRelation[]): void {
   drawSvg(container);
   entities.forEach(e => drawEntity(e, container, diagram));
@@ -50,7 +50,6 @@ function drawDiagram(container: Element, entities: IEntity[], relationsList: IRe
 }
 
 function getEntityRect(diagram: IDiagram, name: string): IRect {
-  // @ts-ignore
   const e = diagram.entitiesList.find(item => item.name === name);
   return e === null ? null : e.rect;
 }
@@ -80,7 +79,6 @@ function drawSvg(container: Element): void {
 }
 
 function getRelationType(relations: IRelation[], name: string): RelationTypeEnum {
-  // @ts-ignore
   const relationType = relations.find(item => item.name === name);
   return relationType === null ? null : relationType.type
 }
@@ -103,8 +101,6 @@ function drawRelation(relationOnDiagram: IRelationOnDiagram, container: Element,
 
   const path = svg.append('path')
     .attr('fill', 'none');
-
-
   path.attr("d",
     `M ${startPoint.x},${startPoint.y}
            L ${startConnector.x}, ${startConnector.y}
@@ -112,22 +108,24 @@ function drawRelation(relationOnDiagram: IRelationOnDiagram, container: Element,
            L ${endPoint.x},${endPoint.y}`);
 
   if (startSide === 'bottom' && endSide === 'right'
-      || startSide === 'bottom' && endSide === 'left'
-      || startSide === 'top' && endSide === 'right'
-      || startSide === 'top' && endSide === 'left'
-      || startSide === 'right' && endSide === 'top'
-      || startSide === 'left' && endSide === 'top'
-      || startSide === 'right' && endSide === 'bottom'
-      || startSide === 'left' && endSide === 'bottom') {
-      // @ts-ignore
-      const middleP = calcMiddlePoint(startPoint, endPoint, startSide, endSide);
-      path.attr("d",
-        `M ${startPoint.x},${startPoint.y}
+    || startSide === 'bottom' && endSide === 'left'
+    || startSide === 'top' && endSide === 'right'
+    || startSide === 'top' && endSide === 'left'
+    || startSide === 'right' && endSide === 'top'
+    || startSide === 'left' && endSide === 'top'
+    || startSide === 'right' && endSide === 'bottom'
+    || startSide === 'left' && endSide === 'bottom'
+    || startSide === 'left' && endSide === 'left'
+    || startSide === 'right' && endSide === 'top') {
+    // @ts-ignore
+    const middleP = calcMiddlePoint(startConnector, endConnector, startSide, endSide);
+    path.attr("d",
+      `M ${startPoint.x},${startPoint.y}
                L ${startConnector.x}, ${startConnector.y} 
                L ${middleP.x},${middleP.y} 
                L ${endConnector.x}, ${endConnector.y}
                L ${endPoint.x},${endPoint.y}`);
-    }
+  }
 
   switch (relationType) {
     case RelationTypeEnum.OneToMany:
@@ -195,12 +193,13 @@ function calcConnectorPoint(position: IRelationPosition, rect: IRect): null | IP
   }
   return {x: x, y: y}
 }
+
 function calcMiddlePoint(startPoint: IPoint, endPoint: IPoint, startSide: SideEnum, endSide: SideEnum) {
   if (startSide === 'bottom' && endSide === 'right') {
     if (startPoint.y > endPoint.y) {
       return {
         x: startPoint.x,
-        y: startPoint.y + 20
+        y: startPoint.y
       }
     } else {
       return {
@@ -226,7 +225,7 @@ function calcMiddlePoint(startPoint: IPoint, endPoint: IPoint, startSide: SideEn
     if (startPoint.y < endPoint.y) {
       return {
         x: startPoint.x,
-        y: startPoint.y - 20
+        y: startPoint.y
       }
     } else {
       return {
@@ -240,7 +239,7 @@ function calcMiddlePoint(startPoint: IPoint, endPoint: IPoint, startSide: SideEn
     if (startPoint.y < endPoint.y) {
       return {
         x: startPoint.x,
-        y: startPoint.y - 20
+        y: startPoint.y
       }
     } else {
       return {
@@ -254,7 +253,7 @@ function calcMiddlePoint(startPoint: IPoint, endPoint: IPoint, startSide: SideEn
     if (startPoint.y > endPoint.y) {
       return {
         x: endPoint.x,
-        y: endPoint.y - 20
+        y: endPoint.y
       }
     } else {
       return {
@@ -265,16 +264,29 @@ function calcMiddlePoint(startPoint: IPoint, endPoint: IPoint, startSide: SideEn
 
   }
   if (startSide === 'left' && endSide === 'top') {
-    if (startPoint.y > endPoint.y) {
+    if (startPoint.y > endPoint.y && startPoint.x < endPoint.x) {
       return {
-        x: endPoint.x,
-        y: endPoint.y - 20
+        x: startPoint.x,
+        y: endPoint.y
       }
-    } else {
+    }
+    if (startPoint.y > endPoint.y && startPoint.x > endPoint.x) {
       return {
-        x: endPoint.x,
-        y: startPoint.y
+        x: startPoint.x,
+        y: endPoint.y
       }
+    }
+    if (startPoint.y < endPoint.y && startPoint.x < endPoint.x) {
+      return {
+        x: startPoint.x,
+        y: endPoint.y
+      }
+    }
+    else {
+        return {
+          x: endPoint.x,
+          y: startPoint.y
+        }
     }
 
   }
@@ -282,7 +294,7 @@ function calcMiddlePoint(startPoint: IPoint, endPoint: IPoint, startSide: SideEn
     if (startPoint.y < endPoint.y) {
       return {
         x: endPoint.x,
-        y: endPoint.y + 20
+        y: endPoint.y
       }
     } else {
       return {
@@ -290,21 +302,33 @@ function calcMiddlePoint(startPoint: IPoint, endPoint: IPoint, startSide: SideEn
         y: startPoint.y
       }
     }
-
   }
-  if (startSide === 'left' && endSide === 'bottom') {
-    if (startPoint.y < endPoint.y) {
+  if (startSide === 'right' && endSide === 'top' || 'right') {
+    if (startPoint.y > endPoint.y && startPoint.x > endPoint.x) {
       return {
         x: endPoint.x,
-        y: endPoint.y + 20,
+        y: startPoint.y
       }
     } else {
       return {
         x: endPoint.x,
-        y: startPoint.y,
+        y: startPoint.y
       }
     }
-
+  }
+  if (startSide === 'left' && endSide === 'left' || 'bottom') {
+    if(startPoint.y > endPoint.y && startPoint.x < endPoint.x) {
+      return {
+        x: startPoint.x,
+        y: endPoint.y
+      }
+    }
+    if(startPoint.y < endPoint.y && startPoint.x < endPoint.x) {
+      return {
+        x: startPoint.x,
+        y: endPoint.y
+      }
+    }
   }
 }
 

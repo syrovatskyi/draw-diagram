@@ -1,8 +1,27 @@
+body {
+    width: 1500px;
+}
+
+.test {
+    position: absolute;
+    border-right: 5px solid black;
+}
+
 .diagram-container {
+    position: relative;
+    left: 800px;
+    height: 700px;
+    overflow: auto;
+    border-bottom: 5px solid black;
+    width: 750px;
+}
+
+.diagram-container2 {
     position: relative;
     height: 700px;
     overflow: auto;
     border-bottom: 5px solid black;
+    width: 750px;
 }
 
 
